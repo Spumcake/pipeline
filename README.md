@@ -1,73 +1,72 @@
-# Resources
+# Resources for Cursor
 
-Reusable roles and skills for focused development. [AGENTS.md](AGENTS.md) defines the working rules.
+Resources is a reusable collection of agent definitions, skills, and templates for taking a software idea through specification, design, and incremental implementation. We built it after seeing agents become overwhelmed by large codebases and broad assignments, spending too much time analyzing instead of delivering useful changes. Its purpose is to divide work into focused tasks with limited context, clear ownership, and meaningful checks, allowing agents to work concurrently where useful while keeping progress understandable and reviewable by a person.
 
-## Import only `.github`
+Version **1.0.0** includes a main-chat Coordinator rule, five focused subagents, and reusable document/model skills. Verification limits are noted below.
 
-The reusable payload is **`.github/` only**. Do not copy Resources' root `AGENTS.md`, `CHANGELOG.md`, or `README.md` into a project. Those describe development and usage of Resources itself. The Coordinator creates or updates the target project's own AGENTS.md from its template, preserving existing project instructions.
+## Install into a project
 
-From the target project root, use a temporary sparse checkout and copy only the payload:
+Import **only `.cursor/`**. Resources' root AGENTS.md, README.md, and CHANGELOG.md describe this repository; do not copy them over a project's own files.
+
+From your target project root:
 
 ```sh
 resources_checkout="$(mktemp -d)"
 git clone --depth 1 --filter=blob:none --sparse https://github.com/Spumcake/Resources.git "$resources_checkout"
-git -C "$resources_checkout" sparse-checkout set .github
-mkdir -p .github
-cp -Ri "$resources_checkout/.github/." .github/
+git -C "$resources_checkout" sparse-checkout set .cursor
+mkdir -p .cursor
+cp -Ri "$resources_checkout/.cursor/." .cursor/
 ```
 
-The temporary checkout may contain repository-root files; the copy command imports none of them. Review overwrite prompts if the target already has matching files. When updating an older installation, review obsolete Resources files separately—the copy merges files and does not remove stale agent definitions. Keep unrelated project configuration. The temporary checkout can be removed afterwards.
+Review overwrite prompts when merging with an existing installation. Preserve unrelated rules and agents. Remove the temporary checkout when finished.
 
-Open the target project in VS Code's built-in **Local** chat, select **Coordinator**, and enable **Run Subagent**. If the roles do not appear, run **Developer: Reload Window**. Keep agents, skills, and templates together under `.github` so their relative links resolve.
+Keep the folder layout intact so references resolve. When migrating, review and remove only obsolete Resources definitions from `.github/agents/` and `.github/skills/`; do not delete unrelated GitHub configuration or project files.
 
-## Start the example trial
+## Use it in Cursor
 
-Import `.github` into the example project using the procedure above. Preserve its existing pitch, interface references, code, and project instructions. Select Coordinator and send:
+1. Open the target project folder in Cursor and start a fresh **Agent** chat.
+2. Attach the manual **coordinator** rule with `@coordinator` (choose the rule in the suggestions). It applies to this conversation; it is not a Coordinator subagent.
+3. Describe what you want in your own words. The rule interprets intent and existing authorization; no prescribed prompt wording is required.
 
-```text
-Prepare the next useful increment for this existing project. Discover the
-available roles and delegate prerequisite checks and missing specialist
-documents to their owners. Reuse the existing pitch, design references,
-and implementation. Create or update TASK.md and this project's AGENTS.md.
-Do not implement yet. Stop when the next bounded assignment is ready,
-or report the specific blocker.
-```
+The Coordinator can explain which roles it would use without dispatching them. Work is delegated when the requested outcome actually requires it. A discussion does not create files. If a suitable role is missing, the Coordinator reports the gap and stops.
 
-After reviewing that outcome, ask it to implement the named assignment. Observe actual named worker calls; request independent work concurrently where dependencies allow, and distinguish overlapping runs from sequential calls. Preparation does not prove implementation or concurrency works.
+For direct work, invoke a worker by its slash name, such as `/product-designer`, or mention its exact name naturally. Direct invocation bypasses coordination. Cursor documents [manual rules](https://cursor.com/docs/rules) and [native subagents](https://cursor.com/docs/subagents).
 
-## Roles and ownership
+## Responsibilities
 
-| Role | Responsibility |
+| Definition | Responsibility |
 | --- | --- |
-| [Coordinator](.github/agents/coordinator.agent.md) | Discover callable roles, partition work, own TASK.md and project AGENTS.md, consolidate audits. |
-| [Product Designer](.github/agents/product-designer.agent.md) | Create PITCH.md and INTERFACE.md; prepare prompts and generate mockups through model skills. |
-| [Technical Planner](.github/agents/technical-planner.agent.md) | Create SYSTEMS.md; establish ownership, contracts, and technical prerequisites. |
-| [Task Operations](.github/agents/task-operations.agent.md) | Implement bounded changes in an established stack. |
-| [Code Review](.github/agents/code-review.agent.md) | Review code or document consistency without fixing it. |
-| [Verification](.github/agents/verification.agent.md) | Execute relevant tests/builds and preview acceptance checks without fixing code. |
+| [Coordinator rule](.cursor/rules/coordinator.mdc) | Interpret intent, explain/delegate work, own TASK.md, PLAN.md, TODO.md, and project AGENTS.md, consolidate authorized-work audits. |
+| [product-designer](.cursor/agents/product-designer.md) | Product intent, PITCH.md, INTERFACE.md, and requested mockups through model skills. |
+| [technical-planner](.cursor/agents/technical-planner.md) | SYSTEMS.md, technical boundaries, contracts, and prerequisites. |
+| [task-operations](.cursor/agents/task-operations.md) | Bounded implementation in an established stack. |
+| [code-review](.cursor/agents/code-review.md) | Read-only review of assigned code or document consistency. |
+| [verification](.cursor/agents/verification.md) | Relevant tests/builds and available browser preview checks; no product fixes. |
 
-The coordinator discovers responsibilities from definitions rather than requiring every role on every task. Workers determine which decisions and documents they need. No suitable callable role means **stop and explain the gap**, not do the work in the main chat. A role file alone does not prove activation or execution.
+Workers use `model: inherit`, so they default to the main chat's model. Only Code Review is configured `readonly: true`; other roles need write access for documents, outputs, or test/build artifacts. Cursor tools are inherited from the parent, so the old VS Code tool allowlists are not retained. Role scope instructions still apply. Worker instructions prohibit further delegation.
 
-## Example requests to Coordinator
+Subagents run in separate contexts. Independent assignments can run concurrently, but completed work must be confirmed from actual tool results; configuration does not prove overlap. Keep shared-file ownership clear.
 
-- “Prepare the next increment for [project]. Have the relevant roles establish their prerequisites, then create TASK.md and AGENTS.md. Do not implement yet.”
-- “Use an image generator to generate two mockups for [specified views], using the existing interface references.” This goes to Product Designer, which selects a model skill and handles generation prerequisites.
-- “Implement [bounded behavior], then have it reviewed and verified against [criteria]. Run independent assignments concurrently where possible.”
+## Skills and templates
 
-If you ask for a task outside the available roles, the coordinator identifies the missing responsibility and suggests adding that role. It must not create one or start a substitute workflow automatically.
+Cursor discovers the [skills](.cursor/skills/) recursively. Read only the capability needed for the assignment:
 
-## Documents and shared skills
+- [Pitch](.cursor/skills/pipeline/pitch/SKILL.md): a short public-readable product pitch with bounded reference research.
+- [Interface](.cursor/skills/tasks/interface/SKILL.md): sitemap, flows, presentation, and requested UX image series through a discovered image-generation skill. Stops if no suitable generator exists.
+- [Plan](.cursor/skills/pipeline/plan/SKILL.md): a brief prose roadmap when implementation planning is authorized.
+- [Todo](.cursor/skills/pipeline/todo/SKILL.md): a short checklist of current actions, without assignment specifications.
+- [Testing](.cursor/skills/tasks/tests/SKILL.md): meaningful checks and stopping rules.
+- [Image generation](.cursor/skills/models/openai/image-2-5-sunburst/SKILL.md): authorized model execution and recovery.
+- [Audit](.cursor/skills/pipeline/audit/SKILL.md): one brief record of coordinated project work, not routine Resources maintenance.
 
-- [Pitch](.github/skills/pipeline/pitch/SKILL.md) → `.project/documents/PITCH.md`.
-- [Interface](.github/skills/tasks/interface/SKILL.md) → root `INTERFACE.md` (the successor to DESIGN.md).
-- [Systems](.github/skills/pipeline/systems/SKILL.md) → `.project/documents/SYSTEMS.md`.
-- Coordinator directly owns `.project/documents/TASK.md` and root `AGENTS.md`; its templates live in `.github/agents/templates/coordinator/`.
-- [Audit](.github/skills/pipeline/audit/SKILL.md) → brief timestamped records under `.project/documents/audits/` after substantial project work coordinated by the Coordinator. Workers return evidence; they do not create separate automatic audits.
-- [Testing](.github/skills/tasks/tests/SKILL.md) → guidance for purposeful tests and stopping.
-- [Image generation](.github/skills/models/openai/image-2-5-sunburst/SKILL.md) → reusable model execution and recovery.
+Coordinator document templates live in [.cursor/agents/templates/coordinator/](.cursor/agents/templates/coordinator/) with `.md.template` suffixes to distinguish them from worker definitions. These templates produce TASK.md (scope and acceptance) and AGENTS.md (working rules). The plan and todo skills own their own templates. PLAN.md and TODO.md are created when the authorized work needs them, not automatically during setup or specification preparation. The Coordinator updates plans and todos as work advances, and writes brief timestamped audits at task or milestone boundaries; workers return evidence without maintaining separate logs. Technical Planner directly authors SYSTEMS.md using its [role-owned template](.cursor/agents/templates/technical-planner/SYSTEMS.md.template); there is no separate systems skill. Document skills include their own templates. See [Cursor skill discovery](https://cursor.com/docs/skills).
 
-Honor existing canonical paths and explicit user destinations. Do not create both DESIGN.md and INTERFACE.md as competing authorities; migrate an existing document deliberately. Roles are configured here, but runtime routing, generation, and concurrency still require observation in the editor. Browser verification depends on available [VS Code browser tools](https://code.visualstudio.com/docs/agents/run/browser-tools).
+Target documents retain their existing defaults: root INTERFACE.md and AGENTS.md; PITCH.md, SYSTEMS.md, TASK.md, PLAN.md, TODO.md, and coordinator audits under `.project/documents/`. Honor explicit project locations. Existing Resources audit records outside this checkout are not part of the payload and are not altered by this conversion.
 
-## Resources development versus project records
+Generated AGENTS.md is a concise shared entry point for every agent: project purpose, language, session orientation, orchestration, records, verification, and boundaries. It references skills by name and leaves role definitions in their own files.
 
-Automatic effort audits belong to the Coordinator workflow in the target project, not to routine maintenance of this Resources repository. Existing local development notes were moved to `resources/documents/audits/`, outside `resources/worktrees/main`; leave them there. That local folder is not part of the imported payload. Target-project coordinator audits still default to `.project/documents/audits/`, unless the project specifies another location.
+After specification or bootstrap work, you can ask the Coordinator to generate images of the main user journey. It delegates the interface workflow, which discovers a generator, maps the views, prepares prompts, and produces consistent images using existing references. Image generation remains optional; a documentation request does not trigger it.
+
+## Validation and ongoing development
+
+The user has reported successful preparation, UX image generation, and incremental implementation in the example project, primarily in Cursor. Recent image naming/high-quality enforcement and concurrency guidance changes have not been independently retested. Version 1.0.0 does not imply identical behavior across models or runners. The example has received the current payload; future Resources edits still need to be copied into consuming projects.

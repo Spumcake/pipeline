@@ -1,25 +1,26 @@
 # Working principles
 
-These instructions govern development of Resources. Import only `.github/` into consuming projects; do not copy this root file, README.md, or CHANGELOG.md. Coordinator templates generate project-specific instructions.
+These instructions govern development of Resources. Import only `.cursor/` into consuming projects; do not copy this root file, README.md, or CHANGELOG.md. Coordinator templates generate project-specific instructions.
 
 Resources provides reusable agent definitions and capabilities for focused development. Its purpose is to keep one agent from having to understand and solve an entire project at once. Judge pipeline decisions by whether they reduce unnecessary context, coordination, and work while delivering the requested outcome.
 
 ## Agents and skills
 
-- `.github/agents/` contains agent definitions and their supporting resources, including templates. Reusable skills belong under `.github/skills/`. A role defines responsibility, allowed actions, relevant context, expected output, and when to stop.
-- `.github/skills/` contains reusable capabilities that different agents can consult. A skill explains how to perform an operation; it does not create a worker or isolate context. Do not disguise a role as a skill.
+- `.cursor/agents/` contains agent definitions and their supporting resources, including templates. Reusable skills belong under `.cursor/skills/`. A role defines responsibility, allowed actions, relevant context, expected output, and when to stop.
+- `.cursor/skills/` contains reusable capabilities that different agents can consult. A skill explains how to perform an operation; it does not create a worker or isolate context. Do not disguise a role as a skill.
+- `.cursor/rules/coordinator.mdc` is a manual rule for the main conversation, attached with `@coordinator`. It is not a subagent or a role selected from a VS Code dropdown.
 - The coordinator is the main conversation's role. It partitions work, invokes predefined workers, resolves dependencies, and combines results. It should not repeat every worker's investigation or implementation.
 - Before starting a project's multi-agent implementation, have the required roles defined, discoverable, and callable in the chosen environment. Confirm real delegation with a small bounded task. Role descriptions alone are not evidence that delegation works.
-- Before executing a coordinated request, match its required capabilities to suitable callable roles. If one is missing, stop and tell the user what role should be added; if a definition exists but cannot run, report that activation blocker. Do not perform partial work, write substitute documents/audits, or use a generic role to bypass the gap. Coordinator-owned TASK/AGENTS authorship remains direct work, but does not permit inventing missing specialist decisions.
+- Before executing a coordinated request, match its required capabilities to suitable callable roles. If one is missing, stop and tell the user what role should be added; if a definition exists but cannot run, report that activation blocker. Do not perform partial work, write substitute documents/audits, or use a generic role to bypass the gap. Coordinator-owned TASK/PLAN/TODO/AGENTS authorship remains direct work, but does not permit inventing missing specialist decisions.
 
 ## Pipeline preparation
 
 Preparation remains a distinct phase. The coordinator discovers roles and their prerequisites rather than enforcing a fixed team or document sequence. Document-creation skills are reusable capabilities; roles own their use and review. Before dependent work, check only the documents needed for that assignment. Each selected role checks its own prerequisites. If a specialist document is missing or materially incomplete, its owning role uses the relevant skill within the authorized preparation scope rather than guessing or generating the entire kit automatically:
 
-- [Product Designer](.github/agents/product-designer.agent.md) owns PITCH via the [pitch skill](.github/skills/pipeline/pitch/SKILL.md): user intent and constraints; default `.project/documents/PITCH.md`.
-- [Product Designer](.github/agents/product-designer.agent.md) also owns root `INTERFACE.md` via the [interface skill](.github/skills/tasks/interface/SKILL.md), and discovers model skills to generate requested mockups. The Coordinator delegates this work rather than generating images itself.
-- [Technical Planner](.github/agents/technical-planner.agent.md) owns technical boundaries and `.project/documents/SYSTEMS.md` via the [systems skill](.github/skills/pipeline/systems/SKILL.md).
-- [Coordinator](.github/agents/coordinator.agent.md) directly creates and maintains TASK.md (roadmap, dependencies, acceptance, and assignments) and project AGENTS.md (working rules). These are role responsibilities, not creation skills. Templates live under `.github/agents/templates/coordinator/`.
+- [Product Designer](.cursor/agents/product-designer.md) owns PITCH via the [pitch skill](.cursor/skills/pipeline/pitch/SKILL.md): user intent and constraints; default `.project/documents/PITCH.md`.
+- [Product Designer](.cursor/agents/product-designer.md) also owns root `INTERFACE.md` via the [interface skill](.cursor/skills/tasks/interface/SKILL.md), and discovers model skills to generate requested mockups. The Coordinator delegates this work rather than generating images itself.
+- [Technical Planner](.cursor/agents/technical-planner.md) owns technical boundaries and `.project/documents/SYSTEMS.md` directly, using its own [template](.cursor/agents/templates/technical-planner/SYSTEMS.md.template).
+- [Coordinator](.cursor/rules/coordinator.mdc) directly creates and maintains TASK.md (scope, acceptance, preview and delivery), PLAN.md (milestones and dependencies), TODO.md (prioritized assignments and status), and project AGENTS.md (working rules). The Coordinator updates TODO on dispatch/results/blockers, PLAN on milestone or dependency changes, and consolidates evidence in timestamped audits at project task or milestone boundaries. These files link to each other instead of duplicating state. TASK and AGENTS authorship remain role responsibilities. PLAN and TODO use the plan and todo skills when implementation planning is authorized; missing files alone do not trigger creation. Templates live under `.cursor/agents/templates/coordinator/` with `.md.template` suffixes so they are not discovered as agent definitions.
 
 Honor existing canonical locations and explicit user paths. Do not maintain duplicate authorities. Writing a specification does not authorize implementation. Missing material intent requires a focused question or an explicit unknown, not an invented requirement.
 
@@ -27,11 +28,15 @@ Automatic effort audits apply to the shipped Coordinator's work in a consuming p
 
 ## Execution roles
 
-- [Task Operations](.github/agents/task-operations.agent.md) implements bounded changes in an established stack; it is not an all-purpose fallback.
-- [Code Review](.github/agents/code-review.agent.md) reviews assigned code or document consistency and returns actionable findings without fixing them.
-- [Verification](.github/agents/verification.agent.md) runs proportionate acceptance checks, tests, builds, and available preview interactions without changing product code.
+- [Task Operations](.cursor/agents/task-operations.md) implements bounded changes in an established stack; it is not an all-purpose fallback.
+- [Code Review](.cursor/agents/code-review.md) reviews assigned code or document consistency and returns actionable findings without fixing them.
+- [Verification](.cursor/agents/verification.md) runs proportionate acceptance checks, tests, builds, and available preview interactions without changing product code.
 
-Each role establishes its prerequisites. If a document it does not own is needed, it returns that need to the Coordinator for the owner. Do not demand every document for every small task. Workers report missing capabilities; they do not take over another role. Their tool access is not a filesystem sandbox.
+Each role establishes its prerequisites. If a document it does not own is needed, it returns that need to the Coordinator for the owner. Do not demand every document for every small task. Workers report missing capabilities; they do not take over another role. Cursor subagents inherit the parent session's tools. Code Review uses Cursor's `readonly: true`; other roles need writes for their assigned artifacts or executed checks. Role prose is not a per-tool permission system.
+
+## Strict role scope
+
+Role definitions are hard capability boundaries, including advice and how-to requests. The Coordinator must route specialist requests before inspecting project contents or Git. Skills cannot expand role authority. Unsupported requests stop with a missing-role explanation. A single-document request is not permission to build the whole pipeline.
 
 ## Assignments and concurrency
 
@@ -51,7 +56,7 @@ An implementation request should produce a working increment, not an expanding p
 
 ## Verification and stopping
 
-Roles whose responsibility includes writing, changing, or reviewing tests must consult [the testing skill](.github/skills/tasks/tests/SKILL.md). Future role definitions with those responsibilities must explicitly reference it. Load it when applicable, not into every conversation automatically.
+Roles whose responsibility includes writing, changing, or reviewing tests must consult [the testing skill](.cursor/skills/tasks/tests/SKILL.md). Future role definitions with those responsibilities must explicitly reference it. Load it when applicable, not into every conversation automatically.
 
 Specify verification proportional to the behavior and risk. Test count and coverage percentage are not goals by themselves. Preserve required checks; do not create new gates without a concrete need.
 

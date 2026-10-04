@@ -1,0 +1,39 @@
+# AGENTS.md — [PLACEHOLDER: project name]
+
+[PLACEHOLDER: two sentences stating what is being built, for whom, and the agreed stack if one exists.] The full scope and acceptance criteria are in [PLACEHOLDER: TASK document path]. These are the shared working instructions for every agent on this project.
+
+**Language:** English for code, comments, documentation, logs, commit messages, and generation prompts, unless the project explicitly requires another language.
+
+## 1. Starting and resuming work
+
+For project work, read this file, then the current milestone in [PLACEHOLDER: PLAN path] and relevant items in [PLACEHOLDER: TODO path], if they exist. The coordinator reads the latest three audits in [PLACEHOLDER: audit directory] to recover recent decisions and results. Workers read their assignment and only the linked context needed for it.
+
+Consult the relevant TASK acceptance criteria and technical contracts before making changes. Before visual work, read [PLACEHOLDER: interface document and approved reference location, if applicable]. Do not load every specification or skill by default. Missing PLAN or TODO files do not authorize creating them.
+
+## 2. Scope and autonomy
+
+Work toward the authorized outcome. Resolve routine choices within the agreed scope; surface decisions that would change the product or exceed that scope. A question does not authorize project edits. Stop at the assignment's completion or report the concrete blocker. Continue to another task only when the user's authorization covers it.
+
+## 3. Orchestration
+
+The coordinator divides work into bounded assignments and integrates the results. Independent work can run concurrently after shared contracts are settled. Give each file or mutable resource one writer at a time. Workers return their result, verification, and blockers without taking over another assignment or repeating the whole project investigation.
+
+[PLACEHOLDER: include only actual project-specific constraints on shared editors, worktrees, data, or integration. Omit when none are established.]
+
+## 4. Plans and records
+
+PLAN describes milestones and dependencies; TODO is the short checklist of current work. The coordinator uses the **plan** and **todo** skills when their creation is needed within authorized work, and maintains them as progress or blockers change. Write important decisions into their owning document when settled; conversation alone is not a durable record.
+
+The coordinator uses the **audit** skill for one brief timestamped record at a milestone boundary or when coordinated work that changed files completes, stops blocked, or is abandoned. Record actual participants, significant attempts, results, and remaining work. Preserve earlier audits. Workers supply evidence rather than separate logs. No hourly updates or progress screenshots are required.
+
+## 5. Verification
+
+Keep the existing working user journey intact. Use the **tests** skill when writing, changing, or reviewing tests. Verify the changed behavior and its relevant failure cases; do not multiply tests or repeat passing checks without a concrete reason. Report what was implemented, what was actually checked, and what remains unverified. Never invent user approval.
+
+[PLACEHOLDER: name the project's essential working journey and any established runtime precautions that apply broadly. Link commands or detailed procedures rather than duplicating them. Omit if not established.]
+
+## 6. Boundaries
+
+[PLACEHOLDER: concise, established limits on working directories, shared data, spending, external actions, commits, and releases. Preserve actual authorization; do not invent budgets, schedules, or unattended-operation rules.]
+
+Keep secrets out of output and version control.

@@ -2,7 +2,7 @@
 
 ## Version convention
 
-Resources uses `MAJOR.MINOR.PATCH` with proof-of-concept prereleases named `MAJOR.MINOR.PATCH-poc.N`.
+Resources uses `MAJOR.MINOR.PATCH`. Earlier proof-of-concept releases used `MAJOR.MINOR.PATCH-poc.N`.
 
 - `0.x` is experimental: workflows and generated-document conventions may change. No compatibility guarantee is implied; migration-impacting changes are called out here.
 - During the proof of concept, increment `poc.N` for the next published iteration of the same intended release.
@@ -10,7 +10,40 @@ Resources uses `MAJOR.MINOR.PATCH` with proof-of-concept prereleases named `MAJO
 - After 1.0, increment MAJOR for incompatible public resource/workflow contracts, MINOR for compatible additions, and PATCH for compatible fixes.
 - Git release tags, when created, use `v` followed by the version. A changelog entry or tag does not establish operational verification.
 
-Version applies to the resources bundle, not the applications it prepares. Project readiness is reported separately as **specified**, **configured**, or **verified**, tied to evidence. No stable release or 1.0 claim will be based on structural validation alone.
+Version applies to the resources bundle, not the applications it prepares. Project readiness is reported separately as **specified**, **configured**, or **verified**, tied to evidence. Release versions reflect the maintained bundle; verification claims remain limited to recorded evidence.
+
+## 1.0.0 — 2026-10-04
+
+First 1.0 release, designated by the project owner following successful user-run preparation, UX generation, and incremental implementation trials. Recent image naming/high-quality enforcement and concurrency instruction changes have not been independently retested.
+
+- Make concurrent implementation a normal coordinator consideration, with bounded workers, exclusive ownership, and a designated integration worker.
+
+- Fold systems-document authoring into Technical Planner and move SYSTEMS.md.template alongside agent templates. Remove the standalone systems skill and synchronize the role/template to example. Existing project SYSTEMS.md is unchanged.
+
+- Require exact timestamped archives before replacing PLAN/TODO for another slice or clearing completed work. Keep routine progress edits in place and preserve unfinished work; synchronize instructions to example without modifying its active project documents.
+
+- Require high image quality in generation instructions and enforce it in the client; reject lower or unset quality before sending requests. Update example configuration and clear its previous prompts/generated outputs at user request. No generation or tests run.
+
+- Use purpose-named image folders with preserved numbered revisions and internal request hashes. Add named-view prompt editing/regeneration guidance; relocate existing example outputs and repair links without generating images. Changes untested at user request.
+
+- Clarify that UX image series need no existing bootstrap artwork: generate an initial overview from the product documents, then reuse it as the visual base. Synced to example; no generation or tests run.
+
+- Extend interface visualization into a discover-first workflow: sitemap, saved prompts, and a sequential UX image series with explicit base references. Abort before artifacts if no suitable image skill exists. Remove tables from the interface template. Synced to example; no workflow or generation tests run.
+
+- Rewrite the project AGENTS template as concise shared session instructions, remove the role catalog, and reference skills by name. Align coordinator authorship guidance; existing example project documents are not regenerated.
+
+- Add plan and todo creation skills with short prose/checklist templates. Coordinator guidance describes their purpose and upkeep without automatically generating project documents. Preserve event-based audit records; no hourly logging.
+
+- Convert the distributable payload from `.github/` to `.cursor/` for Cursor IDE. Keep Coordinator as a manually attached main-chat rule; migrate five workers to native Cursor subagents with inherited models.
+- Replace VS Code invocation/tool metadata with Cursor configuration. Code Review is read-only; other role limits remain instructions over inherited tools.
+- Update active skill/model paths and import instructions. Coordinator templates use `.md.template` suffixes to avoid agent discovery. Historical audit records are untouched; no model trial performed.
+
+- Enforce strict role scope and route-before-inspection; prohibit Coordinator Git investigation and specialist fallback.
+- Cap pitches at 700 words with no tables or administrative preamble; bound reference research to one query and three pages with no manuals/PDFs.
+
+- Refocus pitch creation on solution criteria, concrete usage strategies, verified reference-product adaptations, and presentation criteria from short human input.
+- Replace the table-heavy pitch template with a prose-led product brief; move architecture and delivery-process detail out of its remit.
+- Align Product Designer instructions and the README trial example with this input-to-pitch workflow.
 
 ## 0.3.0-poc.1 — 2026-10-03
 

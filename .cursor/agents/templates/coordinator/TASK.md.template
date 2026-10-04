@@ -1,0 +1,25 @@
+# [PLACEHOLDER: project] — delivery plan
+
+> Adapt only to agreed scope. Remove unused sections and this note. Replace placeholders; preserve explicit unknowns rather than inventing requirements.
+
+**Sources:** [PLACEHOLDER: pitch, design if applicable, systems, and working instructions]
+**Objective and exclusions:** [PLACEHOLDER: smallest complete user/caller journey, release scope, and non-goals]
+**Version convention:** [PLACEHOLDER: version scheme, proof-of-concept/prerelease status, compatibility, and intended release channel]
+
+## Planning and execution
+
+[PLACEHOLDER: link PLAN.md and TODO.md only if they exist. The plan explains implementation milestones; the todo list tracks current actions. Their creation belongs to the plan and todo skills when that work is authorized. Do not generate them to fill this section.]
+
+## Acceptance criteria
+
+[PLACEHOLDER: stable criterion IDs for observable outcomes in the agreed scope: starting state, action, expected result, and proportionate verification or human review. PLAN links these criteria to milestones; TODO links them to assignments.]
+
+## Development and preview
+
+[PLACEHOLDER: applicable setup/launch/build procedures and prerequisites; label unexecuted commands. Preview scenario, sample data, expected result, readiness, reset/shutdown, and real versus simulated boundaries.]
+
+## Verification and delivery
+
+[PLACEHOLDER: existing required checks and justified new checks; explain any real-service or human-review limits. Reference the testing skill when defining tests.]
+
+[PLACEHOLDER: deliverable, done/deployed conditions, release prerequisites/authority, and unresolved decisions affecting the next increment. Link timestamped audits for actual results; do not duplicate their histories.]
