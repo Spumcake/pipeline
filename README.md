@@ -2,7 +2,7 @@
 
 Pipeline is a reusable collection of agent definitions, skills, and templates for taking a software idea through specification, design, and incremental implementation. We built it after seeing agents become overwhelmed by large codebases and broad assignments, spending too much time analyzing instead of delivering useful changes. Its purpose is to divide work into focused tasks with limited context, clear ownership, and meaningful checks, allowing agents to work concurrently where useful while keeping progress understandable and reviewable by a person.
 
-Version **1.0.0** includes a main-chat Coordinator rule, five focused subagents, and reusable document/model skills. Unreleased work on `dev` adds a Documentation subagent, test levels with a version-keyed coverage record, release candidates, and an outside Grok release tester. Verification limits are noted below.
+Version **1.0.0** includes a main-chat Coordinator rule, five focused subagents, and reusable document/model skills. Unreleased work adds a Documentation subagent, test levels with a version-keyed coverage record, release candidates, and an outside Grok release tester. Verification limits are noted below.
 
 ## Install into a project
 
@@ -78,4 +78,4 @@ When Verification recommends a candidate, you tag a `dev` commit `<version>-cand
 
 ## Validation and ongoing development
 
-The user has reported successful preparation, UX image generation, and incremental implementation in the example project, primarily in Cursor. Recent image naming/high-quality enforcement and concurrency guidance changes have not been independently retested. The testing, candidate, README, and Grok additions on `dev` have not been trialled; the candidate workflow's issue script was dry-run locally only. Version 1.0.0 does not imply identical behavior across models or runners. The example has received the current payload; future Pipeline edits still need to be copied into consuming projects.
+The user has reported successful preparation, UX image generation, and incremental implementation in the example project, primarily in Cursor. Recent image naming/high-quality enforcement and concurrency guidance changes have not been independently retested. The unreleased testing, candidate, README, and Grok additions have not been trialled; the candidate workflow's issue script was dry-run locally only. Version 1.0.0 does not imply identical behavior across models or runners. The example has received the current payload; future Pipeline edits still need to be copied into consuming projects.

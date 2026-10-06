@@ -12,7 +12,7 @@ Pipeline uses `MAJOR.MINOR.PATCH`. Earlier proof-of-concept releases used `MAJOR
 
 Version applies to the Pipeline bundle, not the applications it prepares. Project readiness is reported separately as **specified**, **configured**, or **verified**, tied to evidence. Release versions reflect the maintained bundle; verification claims remain limited to recorded evidence.
 
-## Unreleased (dev)
+## Unreleased
 
 - Rename the project from Resources to Pipeline.
 - Define four test levels: preview after a change, scripted tests for that change, deterministic every-commit GitHub Actions checks, and release testing of tagged candidates. The tests skill places each check at one level.
