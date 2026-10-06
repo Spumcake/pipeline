@@ -1,6 +1,6 @@
 ---
 name: tests
-description: Decide whether automated tests are warranted and scope useful coverage when writing, changing, or reviewing tests. Use to prevent redundant tests and unnecessary verification loops; not for unrelated implementation work.
+description: Decide whether automated tests are warranted, which test level they belong to, and scope useful coverage when writing, changing, or reviewing tests. Use to prevent redundant tests and unnecessary verification loops; not for unrelated implementation work.
 ---
 
 # Purposeful testing
@@ -40,6 +40,17 @@ These are decision criteria, not exemptions from real requirements. A visible la
 Use a human-reproducible preview for layout, appearance, and interaction judgments where appropriate. A snapshot or DOM assertion alone does not establish that a screen looks or feels right. Conversely, a preview alone does not establish data integrity or authorization behavior.
 
 Mock external boundaries only when needed to isolate the behavior under test. A passing mock is not proof that a real service works. State when a real integration check remains blocked.
+
+## Put each check at the right level
+
+A check belongs at the cheapest level that reliably catches its failure. Do not run the same condition at several levels by default.
+
+- **After a change:** a single goal-based pass through the affected flow in the local preview. Use it for interaction, layout, and states that scripts cannot judge.
+- **Scripted tests for the change:** the tests for the changed behavior, run once when the change is complete and again only after a relevant edit.
+- **Every commit:** GitHub Actions runs these on pushes and pull requests to `dev` and `main`. They must be deterministic and fast, normally a few minutes. Include the build, established lint or type checks, and the unit and integration tests that protect TASK rules and stored data. Exclude browser exploration, paid or rate-limited services, model calls, and anything that needs a person to judge the result. List the commands in TESTING.md so the workflow and local runs agree.
+- **Release candidate:** an outside tester installs one tagged commit from a fresh clone and works through goal-based journeys, an upgrade with existing data where relevant, and a usability review. Use it for what the other levels cannot show: installing from the documents, first use, navigation, and fidelity to INTERFACE. It runs only when a candidate is tagged, never per commit.
+
+When a new test is justified, decide its level first. A rule check that could run every commit should not wait for release testing; a usability judgment should not become a brittle every-commit script.
 
 ## Run and stop
 

@@ -30,6 +30,8 @@ The coordinator uses the **audit** skill for one brief timestamped record at a m
 
 Keep the existing working user journey intact. Use the **tests** skill when writing, changing, or reviewing tests. Verify the changed behavior and its relevant failure cases; do not multiply tests or repeat passing checks without a concrete reason. Report what was implemented, what was actually checked, and what remains unverified. Never invent user approval.
 
+Testing levels, every-commit commands, the release-test brief, and the record of what was verified at which commit are in [PLACEHOLDER: TESTING path, if it exists]. Before work is committed, the README is revisited so it matches the code. Release candidates are tagged by the user only; agents recommend them.
+
 [PLACEHOLDER: name the project's essential working journey and any established runtime precautions that apply broadly. Link commands or detailed procedures rather than duplicating them. Omit if not established.]
 
 ## 6. Boundaries

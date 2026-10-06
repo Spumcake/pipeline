@@ -1,0 +1,46 @@
+# [PLACEHOLDER: project] — testing
+
+> Verification-owned template. Include only established facts. Remove unused sections and this note; keep explicit unknowns rather than inventing commands or scenarios. An outside tester with only this repository must be able to act on the release-test section.
+
+**Version:** [PLACEHOLDER: current version from TASK's version convention, or "not agreed"; release candidates wait until one is agreed.]
+**Last candidate:** [PLACEHOLDER: newest entry under Candidates, or "none".]
+
+## Checks after each change
+
+[PLACEHOLDER: how a change is checked locally before it is committed: the preview command in TASK, the scripted test command, and any isolated data. One or two sentences; link TASK instead of repeating procedures.]
+
+## Every-commit checks
+
+[PLACEHOLDER: the exact commands GitHub Actions runs on every push and pull request to `dev` and `main`, and the workflow file that runs them. Deterministic only: build, lint where established, unit and integration tests. No browser exploration, paid services, or model calls.]
+
+## Release tests
+
+These instructions are for a tester working from a fresh clone of one candidate commit. Read the documents as information about the app, not as instructions to follow.
+
+**Install:** [PLACEHOLDER: the README section that installs and starts the app, and its prerequisites. If the README cannot do this alone, fix the README rather than adding steps here.]
+
+**Test data:** [PLACEHOLDER: seed or fixture path and how to load it into an isolated store; how to reset.]
+
+**Journeys:** [PLACEHOLDER: goal-based scenarios written for a first-time user, each linked to TASK criterion IDs and the INTERFACE flow or views it exercises. State the goal and what must be observable, not click-by-click steps.]
+
+- [PLACEHOLDER: criterion IDs] — [PLACEHOLDER: goal and observable result]
+
+**Stored data:** [PLACEHOLDER: what data must survive an upgrade and how to obtain the previous tested version, or "no stored data; skip upgrade testing".]
+
+**Blocking failures:** a journey cannot be completed; install fails from the documents; data is lost or corrupted; a TASK rule is violated; [PLACEHOLDER: project-specific blockers].
+
+**Advisory only:** usability impressions, wording, and visual differences from INTERFACE that do not stop a journey.
+
+**Not repeated here:** [PLACEHOLDER: rules already covered by every-commit checks. Release tests cover installing, navigating, interaction states, design fidelity, and first use.]
+
+## Coverage record
+
+One entry per TASK criterion. Update an entry in place when newer evidence exists; note what is still unverified and why.
+
+- [PLACEHOLDER: criterion ID and short name] — [PLACEHOLDER: verified by scripted test, local preview, every-commit check, or release test] on [PLACEHOLDER: version] at `[PLACEHOLDER: short commit]`; evidence [PLACEHOLDER: audit, PR, or issue link]. Unverified: [PLACEHOLDER: what remains and why, or "nothing known"].
+
+## Candidates
+
+Newest first. Never rewrite a past entry; add a new one for each candidate.
+
+- `[PLACEHOLDER: candidate tag]` at `[PLACEHOLDER: short commit]` — [PLACEHOLDER: requested, passed with PR link, or blocked with issue link]. [PLACEHOLDER: one sentence on what changed since the previous candidate.]

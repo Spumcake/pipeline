@@ -23,7 +23,7 @@ Create the folder when needed. Use a numeric suffix on collision; never overwrit
 
 Include the intended outcome, actual roles involved and their assignments, concise attempts/changes, achieved outcome or blocker, and evidence/limits. Distinguish requested roles from actually invoked workers, independent review from self-review, and planned concurrency from observed overlap. If one agent did the work, say so.
 
-For checks, report what ran and its result; distinguish inspection, automated execution, human review, and unverified claims. Link relevant files or existing output instead of copying logs. Include the input revision when available and relevant, noting uncommitted changes; do not require hashes for every document. Exclude secrets and unnecessary personal data.
+For checks, report what ran and its result; distinguish inspection, automated execution, human review, and unverified claims. Link relevant files or existing output instead of copying logs. Record the version from TASK's version convention and the commit the evidence applies to (`git rev-parse --short HEAD`), noting uncommitted changes; TESTING.md's coverage record and later release testing depend on it. Do not require hashes for every document. Exclude secrets and unnecessary personal data.
 
 Aim for a brief record, usually 150–300 words; add only detail needed to explain material findings. Record failed or abandoned approaches that explain the outcome without narrating every step. Do not fabricate approvals, costs, or measurements.
 

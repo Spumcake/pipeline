@@ -30,7 +30,10 @@ Automatic effort audits apply to the shipped Coordinator's work in a consuming p
 
 - [Task Operations](.cursor/agents/task-operations.md) implements bounded changes in an established stack; it is not an all-purpose fallback.
 - [Code Review](.cursor/agents/code-review.md) reviews assigned code or document consistency and returns actionable findings without fixing them.
-- [Verification](.cursor/agents/verification.md) runs proportionate acceptance checks, tests, builds, and available preview interactions without changing product code.
+- [Verification](.cursor/agents/verification.md) runs proportionate acceptance checks, tests, builds, and available preview interactions without changing product code. It owns TESTING.md and recommends release candidates.
+- [Documentation](.cursor/agents/documentation.md) owns the public README.md and revisits it before each commit.
+
+Release testing is done outside Pipeline by a Grok tester whose skills live in `grok/`. Those skills must work from an app repository alone and never depend on the `.cursor/` payload. Keep them out of `.cursor/` so Cursor does not discover them.
 
 Each role establishes its prerequisites. If a document it does not own is needed, it returns that need to the Coordinator for the owner. Do not demand every document for every small task. Workers report missing capabilities; they do not take over another role. Cursor subagents inherit the parent session's tools. Code Review uses Cursor's `readonly: true`; other roles need writes for their assigned artifacts or executed checks. Role prose is not a per-tool permission system.
 

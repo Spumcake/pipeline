@@ -1,7 +1,8 @@
 # [PLACEHOLDER: effort]
 
 **UTC:** [PLACEHOLDER: actual timestamp]
-**Scope/baseline:** [PLACEHOLDER: target, relevant inputs/revision and dirty state if applicable]
+**Scope/baseline:** [PLACEHOLDER: target and relevant inputs]
+**Version and commit:** [PLACEHOLDER: version from TASK or "not agreed"; short commit; "plus uncommitted changes" when the tree was dirty]
 **Outcome:** [PLACEHOLDER: completed, partial, blocked, or abandoned; what this describes]
 
 ## Goal and participants

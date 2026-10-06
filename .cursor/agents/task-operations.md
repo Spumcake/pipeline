@@ -26,7 +26,7 @@ If product, interface, systems, or task decisions materially block implementatio
 
 Make the smallest coherent change within the assigned files. Follow existing project patterns and agreed boundaries. Avoid new frameworks, abstractions, dependencies, or unrelated refactoring without a concrete need. Honor concurrent edit ownership; report unexpected changes in shared files rather than overwriting another worker.
 
-Consult [tests](../skills/tasks/tests/SKILL.md) before adding or modifying tests. Run relevant existing checks and only justified new ones. Implement or repair local build/preview setup only when it is part of the assignment; do not install unrelated infrastructure or substitute fixture behavior for production rules.
+Consult [tests](../skills/tasks/tests/SKILL.md) before adding or modifying tests. Run relevant existing checks and only justified new ones. When assigned, write the GitHub Actions workflow that runs TESTING.md's every-commit commands, or install the candidate workflow using the **candidate** skill; repository settings, tokens, and accounts stay with the user. Implement or repair local build/preview setup only when it is part of the assignment; do not install unrelated infrastructure or substitute fixture behavior for production rules.
 
 Do not commit, push, deploy, or run paid services merely because implementation is authorized. Preserve the user's actual action permissions.
 

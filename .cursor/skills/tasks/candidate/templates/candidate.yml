@@ -1,0 +1,76 @@
+# Release-candidate request.
+# Push a tag named <version>-candidate.<n> (for example 1.2.0-candidate.1) on a dev commit.
+# This pins that commit to the branch candidate/<tag> and opens a "Release test" issue for the tester.
+# Set the repository variable RELEASE_TESTER to the tester's GitHub login to mention and assign it.
+name: Candidate request
+
+on:
+  push:
+    tags:
+      - '*-candidate.*'
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve the tagged commit
+        id: tag
+        run: |
+          sha="$(git rev-parse "${GITHUB_REF_NAME}^{commit}")"
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "version=${GITHUB_REF_NAME%-candidate.*}" >> "$GITHUB_OUTPUT"
+
+      - name: Check the commit is on dev
+        run: |
+          if ! git merge-base --is-ancestor "${{ steps.tag.outputs.sha }}" origin/dev; then
+            echo "::error::${GITHUB_REF_NAME} is not on dev. Candidates are tagged on dev commits."
+            exit 1
+          fi
+
+      - name: Pin the commit to a candidate branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${GITHUB_REPOSITORY}/git/refs" \
+            -f ref="refs/heads/candidate/${GITHUB_REF_NAME}" \
+            -f sha="${{ steps.tag.outputs.sha }}"
+
+      - name: Open the release-test issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TESTER: ${{ vars.RELEASE_TESTER }}
+          SHA: ${{ steps.tag.outputs.sha }}
+          VERSION: ${{ steps.tag.outputs.version }}
+        run: |
+          gh label create release-test --color 2563EB --description "Release-candidate test request" 2>/dev/null || true
+          gh label create blocked --color B91C1C --description "Release test found blocking failures" 2>/dev/null || true
+
+          mention=""
+          if [ -n "$TESTER" ]; then mention="@${TESTER} "; fi
+
+          cat > body.md <<EOF
+          ${mention}please release-test this candidate.
+
+          - Version: ${VERSION}
+          - Tag: \`${GITHUB_REF_NAME}\`
+          - Commit: \`${SHA}\`
+          - Branch: \`candidate/${GITHUB_REF_NAME}\`
+
+          Clone that commit fresh and follow the release-test section of TESTING.md.
+          If it passes, open a pull request from \`candidate/${GITHUB_REF_NAME}\` to \`main\` with the report and close this issue.
+          If it fails, post the report here and add the \`blocked\` label.
+          EOF
+
+          url="$(gh issue create --title "Release test: ${GITHUB_REF_NAME}" --label release-test --body-file body.md)"
+          echo "Opened $url"
+          if [ -n "$TESTER" ]; then
+            gh issue edit "$url" --add-assignee "$TESTER" || echo "::warning::Could not assign ${TESTER}; check it has access to this repository."
+          fi

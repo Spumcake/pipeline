@@ -12,6 +12,17 @@ Pipeline uses `MAJOR.MINOR.PATCH`. Earlier proof-of-concept releases used `MAJOR
 
 Version applies to the Pipeline bundle, not the applications it prepares. Project readiness is reported separately as **specified**, **configured**, or **verified**, tied to evidence. Release versions reflect the maintained bundle; verification claims remain limited to recorded evidence.
 
+## Unreleased (dev)
+
+- Rename the project from Resources to Pipeline.
+- Define four test levels: preview after a change, scripted tests for that change, deterministic every-commit GitHub Actions checks, and release testing of tagged candidates. The tests skill places each check at one level.
+- Add a Verification-owned TESTING.md template with every-commit commands, a release-test brief for an outside tester, and a coverage record keyed by version and commit. Verification records the commit it checked and recommends release candidates.
+- Require audits to record the version and commit; the Coordinator may read the current commit and dirty state for that purpose only.
+- Add the candidate skill and workflow: `<version>-candidate.<n>` tags on `dev` pin the commit to `candidate/<tag>` and open a test-request issue. The user tags and merges.
+- Add a Documentation subagent and README skill modelled on mature open-source READMEs (badges, description, features, demo, stack, quick start, install, development, documentation, contributing, license). The Coordinator has it revisit the README before coordinated work is committed.
+- Add `grok/` with setup notes and four generic release-tester skills (release-test, fresh-install, journey-test, upgrade-test) that work from an app repository alone, open a pull request to `main`, or block the request issue.
+- Validation: YAML parsed and the issue script dry-run with a stubbed `gh`. No Cursor, GitHub Actions, or Grok trial has been run.
+
 ## 1.0.0 — 2026-10-04
 
 First 1.0 release, designated by the project owner following successful user-run preparation, UX generation, and incremental implementation trials. Recent image naming/high-quality enforcement and concurrency instruction changes have not been independently retested.
