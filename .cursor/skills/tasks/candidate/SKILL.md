@@ -55,7 +55,7 @@ This is one-time setup per project, done by an implementation role when assigned
 
 - the repository variable `RELEASE_TESTER`, set to the tester's GitHub login, so the issue mentions and assigns it;
 - branch protection on `main` and `dev`, so only the user merges;
-- the tester account's access: read contents, write pull requests and issues, no push.
+- the tester's GitHub account as a collaborator, with a ruleset on `main` requiring an approving review so the tester cannot merge its own pull request. `.project/usage/grok-release-tester.md` in the Pipeline repository covers the tester's setup.
 
 Do not create accounts, tokens, or repository settings. Whether a tester picks up the mention reliably is unconfirmed until a first trial; report the trial's outcome honestly.
 

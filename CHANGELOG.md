@@ -20,7 +20,7 @@ Version applies to the Pipeline bundle, not the applications it prepares. Projec
 - Require audits to record the version and commit; the Coordinator may read the current commit and dirty state for that purpose only.
 - Add the candidate skill and workflow: `<version>-candidate.<n>` tags on `dev` pin the commit to `candidate/<tag>` and open a test-request issue. The user tags and merges.
 - Add a Documentation subagent and README skill modelled on mature open-source READMEs (badges, description, features, demo, stack, quick start, install, development, documentation, contributing, license). The Coordinator has it revisit the README before coordinated work is committed.
-- Add `grok/` with setup notes and four generic release-tester skills (release-test, fresh-install, journey-test, upgrade-test) that work from an app repository alone, open a pull request to `main`, or block the request issue.
+- Add a manual setup guide, `.project/usage/grok-release-tester.md`, for a Grok Bot release tester. It covers GitHub access, the bot's job description, chat messages that teach four skills (release-test, fresh-install, journey-test, upgrade-test), approval rules, the routine, and a first trial. The tester works from an app repository alone, and opens a pull request to `main` or blocks the request issue.
 - Validation: YAML parsed and the issue script dry-run with a stubbed `gh`. No Cursor, GitHub Actions, or Grok trial has been run.
 
 ## 1.0.0 — 2026-10-04
