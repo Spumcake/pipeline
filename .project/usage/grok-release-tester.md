@@ -20,15 +20,22 @@ The tester checks the app, not Pipeline. It works only from the app's repository
 
 ## 2. Give the bot access to the app repository
 
-For each app repository:
+These settings are on github.com, on each app repository's own **Settings** tab, not in Grok Bot.
 
-1. Invite the bot's GitHub account as a collaborator under **Settings → Collaborators**, then accept the invitation while signed in as the bot.
-2. Under **Settings → Rules → Rulesets**, add a ruleset for `main` that requires a pull request with one approving review. The bot cannot approve its own pull request, so only you can merge. Personal repositories cannot limit a collaborator's write access more finely. If you need the bot to be unable to push at all, move the repositories into a free GitHub organization and give the bot a read-only role plus triage.
-3. Under **Settings → Secrets and variables → Actions → Variables**, add `RELEASE_TESTER` set to the bot's GitHub login.
+1. **Collaborator.** Under **Collaborators**, invite the bot's GitHub account, then accept the invitation while signed in as the bot.
+2. **Ruleset on `main`.** In the left sidebar under **Code and automation**, open **Rules → Rulesets**, then **New ruleset → New branch ruleset**:
+   - Name it `main`, and set **Enforcement status** to **Active**.
+   - Under **Bypass list**, add **Repository admin** so you can still merge your own work.
+   - Under **Target branches**, choose **Add target → Include default branch**, or include by pattern `main`.
+   - Under **Branch rules**, tick **Require a pull request before merging** and set **Required approvals** to 1. Leave **Block force pushes** ticked.
+   - Save. The bot cannot approve its own pull request, so it cannot merge.
+
+   On a free personal account, rulesets apply only to public repositories; a private repository needs GitHub Pro or an organization on a paid plan. Personal repositories also cannot stop a collaborator pushing to other branches. If you need the bot unable to push at all, move the repositories into a GitHub organization and give it the Triage role.
+3. **Variable.** Under **Secrets and variables → Actions → Variables**, add the repository variable `RELEASE_TESTER`, set to the bot's GitHub login.
 
 ## 3. Create the bot
 
-In Grok Bot, create a new bot. Name it **Release Tester**, and use this as its job description:
+In Grok Bot, create a new bot. Give it any name, such as **Release Tester** or **Product Tester**, and use this as its job description:
 
 ```text
 I release-test web and desktop apps from their GitHub repositories. When given a release-candidate tag, I clone that exact commit fresh, install the app using only its README and documents, test what changed since the last candidate as a first-time user, and report what I observed. I never edit code, push, merge, or change repository settings. My only outputs are a test report plus either one pull request or one issue comment and label.
@@ -148,10 +155,14 @@ Return the previous version, the records checked, the result, and evidence.
 
 ## 6. Set approval rules
 
-Grok asks before sending, publishing, or deleting. Without rules, the tester pauses at its final step every run. In the bot's approval settings, or by asking the bot to set them up, add:
+Grok asks before sending, publishing, or deleting. Without rules, the tester pauses at its final step every run. In Grok Bot open **Settings → General → Auto-review Rules**. Keep **Auto-review** on, and add one rule per action. Each rule has a **When Grok Bot wants to** sentence and an **It should** choice:
 
-- **Always allow:** opening pull requests, commenting on issues, adding labels, and closing issues, in your app repositories only.
-- **Require approval:** everything else, including anything outside GitHub. Require-approval rules win when both match, so keep the allow rules narrow.
+- "open a pull request on GitHub as the release tester" — **Allow automatically**
+- "comment on, label, or close a GitHub issue as the release tester" — **Allow automatically**
+- "push to, merge, or delete a GitHub branch or tag" — **Ask first**
+- "change settings, collaborators, or secrets on GitHub" — **Ask first**
+
+Auto-review rules apply to every bot on your account, not just the tester. "Ask first" wins when rules conflict, so keep the allow rules narrow and keep the ask-first rules. If you use a separate Grok account for the tester, its rules stay separate from your other bots'.
 
 ## 7. Create the routine
 
