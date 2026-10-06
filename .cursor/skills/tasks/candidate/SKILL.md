@@ -43,7 +43,7 @@ Add the candidate to TESTING.md as requested, with its commit and one sentence o
 
 ## What happens next
 
-The candidate workflow checks that the tagged commit is on `dev`, creates the branch `candidate/<tag>` at that commit, and opens a "Release test" issue naming the version, tag, and commit for the tester. The tester clones that commit, follows the release-test section, and either opens a pull request from `candidate/<tag>` to `main` with its report, or posts the report on the issue and labels it `blocked`. The user reviews and merges. The pinned branch keeps later `dev` work out of the tested pull request.
+The candidate workflow checks that the tagged commit is on `dev`, creates the branch `candidate/<tag>` at that commit, and opens a "Release test" issue labelled `release-test`, naming the version, tag, and commit for the tester. The tester clones that commit, follows the release-test section, and either opens a pull request from `candidate/<tag>` to `main` with its report, or posts the report on the issue and labels it `blocked`. The user reviews and merges. The pinned branch keeps later `dev` work out of the tested pull request.
 
 ## Record the result
 
@@ -51,12 +51,11 @@ When assigned, Verification reads the tester's report from the pull request or i
 
 ## Install the workflow
 
-This is one-time setup per project, done by an implementation role when assigned. Copy [the workflow](templates/candidate.yml) to `.github/workflows/candidate.yml` without project-specific changes. Then report the settings only the user can make in GitHub:
+This is one-time setup per project, done by an implementation role when assigned. Copy [the workflow](templates/candidate.yml) to `.github/workflows/candidate.yml` without project-specific changes. Then report what only the user can set up:
 
-- the repository variable `RELEASE_TESTER`, set to the tester's GitHub login, so the issue mentions and assigns it;
-- branch protection on `main` and `dev`, so only the user merges;
-- the tester's GitHub account as a collaborator, with a ruleset on `main` requiring an approving review so the tester cannot merge its own pull request. `.project/usage/grok-release-tester.md` in the Pipeline repository covers the tester's setup.
+- the tester's access to this repository: the tester polls for open `release-test` issues with the GitHub CLI, using a fine-grained token that can read contents and write issues and pull requests. `.project/usage/grok-release-tester.md` in the Pipeline repository covers this;
+- the optional repository variable `RELEASE_TESTER`, only when the tester has its own GitHub account to mention and assign.
 
-Do not create accounts, tokens, or repository settings. Whether a tester picks up the mention reliably is unconfirmed until a first trial; report the trial's outcome honestly.
+Do not create accounts, tokens, or repository settings. Whether the tester picks up requests reliably is unconfirmed until a first trial; report the trial's outcome honestly.
 
 Return the recommendation, missing prerequisites, or recorded result, then stop.
