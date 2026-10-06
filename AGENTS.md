@@ -33,7 +33,7 @@ Automatic effort audits apply to the shipped Coordinator's work in a consuming p
 - [Verification](.cursor/agents/verification.md) runs proportionate acceptance checks, tests, builds, and available preview interactions without changing product code. It owns TESTING.md and recommends release candidates.
 - [Documentation](.cursor/agents/documentation.md) owns the public README.md and revisits it before each commit.
 
-Release testing is done outside Pipeline by a Grok Bot that the user sets up by hand, following `.project/usage/grok-release-tester.md`. Grok Bot skills are taught in chat, not shipped as files. The tester works from an app repository alone and never depends on the `.cursor/` payload, so keep TESTING.md, README, and the project documents sufficient for it.
+Release testing is done outside Pipeline by a Grok Bot. The bot reads the outcome brief in `.project/usage/release-tester.md` and configures its own skills and routines; Pipeline does not ship Grok skills. The tester works from an app repository alone and never depends on the `.cursor/` payload, so keep TESTING.md, README, and the project documents sufficient for it.
 
 Each role establishes its prerequisites. If a document it does not own is needed, it returns that need to the Coordinator for the owner. Do not demand every document for every small task. Workers report missing capabilities; they do not take over another role. Cursor subagents inherit the parent session's tools. Code Review uses Cursor's `readonly: true`; other roles need writes for their assigned artifacts or executed checks. Role prose is not a per-tool permission system.
 
