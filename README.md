@@ -1,26 +1,26 @@
-# Resources for Cursor
+# Pipeline for Cursor
 
-Resources is a reusable collection of agent definitions, skills, and templates for taking a software idea through specification, design, and incremental implementation. We built it after seeing agents become overwhelmed by large codebases and broad assignments, spending too much time analyzing instead of delivering useful changes. Its purpose is to divide work into focused tasks with limited context, clear ownership, and meaningful checks, allowing agents to work concurrently where useful while keeping progress understandable and reviewable by a person.
+Pipeline is a reusable collection of agent definitions, skills, and templates for taking a software idea through specification, design, and incremental implementation. We built it after seeing agents become overwhelmed by large codebases and broad assignments, spending too much time analyzing instead of delivering useful changes. Its purpose is to divide work into focused tasks with limited context, clear ownership, and meaningful checks, allowing agents to work concurrently where useful while keeping progress understandable and reviewable by a person.
 
 Version **1.0.0** includes a main-chat Coordinator rule, five focused subagents, and reusable document/model skills. Verification limits are noted below.
 
 ## Install into a project
 
-Import **only `.cursor/`**. Resources' root AGENTS.md, README.md, and CHANGELOG.md describe this repository; do not copy them over a project's own files.
+Import **only `.cursor/`**. Pipeline's root AGENTS.md, README.md, and CHANGELOG.md describe this repository; do not copy them over a project's own files.
 
 From your target project root:
 
 ```sh
-resources_checkout="$(mktemp -d)"
-git clone --depth 1 --filter=blob:none --sparse https://github.com/Spumcake/Resources.git "$resources_checkout"
-git -C "$resources_checkout" sparse-checkout set .cursor
+pipeline_checkout="$(mktemp -d)"
+git clone --depth 1 --filter=blob:none --sparse https://github.com/Spumcake/Pipeline.git "$pipeline_checkout"
+git -C "$pipeline_checkout" sparse-checkout set .cursor
 mkdir -p .cursor
-cp -Ri "$resources_checkout/.cursor/." .cursor/
+cp -Ri "$pipeline_checkout/.cursor/." .cursor/
 ```
 
 Review overwrite prompts when merging with an existing installation. Preserve unrelated rules and agents. Remove the temporary checkout when finished.
 
-Keep the folder layout intact so references resolve. When migrating, review and remove only obsolete Resources definitions from `.github/agents/` and `.github/skills/`; do not delete unrelated GitHub configuration or project files.
+Keep the folder layout intact so references resolve. When migrating, review and remove only obsolete Pipeline definitions from `.github/agents/` and `.github/skills/`; do not delete unrelated GitHub configuration or project files.
 
 ## Use it in Cursor
 
@@ -57,11 +57,11 @@ Cursor discovers the [skills](.cursor/skills/) recursively. Read only the capabi
 - [Todo](.cursor/skills/pipeline/todo/SKILL.md): a short checklist of current actions, without assignment specifications.
 - [Testing](.cursor/skills/tasks/tests/SKILL.md): meaningful checks and stopping rules.
 - [Image generation](.cursor/skills/models/openai/image-2-5-sunburst/SKILL.md): authorized model execution and recovery.
-- [Audit](.cursor/skills/pipeline/audit/SKILL.md): one brief record of coordinated project work, not routine Resources maintenance.
+- [Audit](.cursor/skills/pipeline/audit/SKILL.md): one brief record of coordinated project work, not routine Pipeline maintenance.
 
 Coordinator document templates live in [.cursor/agents/templates/coordinator/](.cursor/agents/templates/coordinator/) with `.md.template` suffixes to distinguish them from worker definitions. These templates produce TASK.md (scope and acceptance) and AGENTS.md (working rules). The plan and todo skills own their own templates. PLAN.md and TODO.md are created when the authorized work needs them, not automatically during setup or specification preparation. The Coordinator updates plans and todos as work advances, and writes brief timestamped audits at task or milestone boundaries; workers return evidence without maintaining separate logs. Technical Planner directly authors SYSTEMS.md using its [role-owned template](.cursor/agents/templates/technical-planner/SYSTEMS.md.template); there is no separate systems skill. Document skills include their own templates. See [Cursor skill discovery](https://cursor.com/docs/skills).
 
-Target documents retain their existing defaults: root INTERFACE.md and AGENTS.md; PITCH.md, SYSTEMS.md, TASK.md, PLAN.md, TODO.md, and coordinator audits under `.project/documents/`. Honor explicit project locations. Existing Resources audit records outside this checkout are not part of the payload and are not altered by this conversion.
+Target documents retain their existing defaults: root INTERFACE.md and AGENTS.md; PITCH.md, SYSTEMS.md, TASK.md, PLAN.md, TODO.md, and coordinator audits under `.project/documents/`. Honor explicit project locations. Existing Pipeline audit records outside this checkout are not part of the payload and are not altered by this conversion.
 
 Generated AGENTS.md is a concise shared entry point for every agent: project purpose, language, session orientation, orchestration, records, verification, and boundaries. It references skills by name and leaves role definitions in their own files.
 
@@ -69,4 +69,4 @@ After specification or bootstrap work, you can ask the Coordinator to generate i
 
 ## Validation and ongoing development
 
-The user has reported successful preparation, UX image generation, and incremental implementation in the example project, primarily in Cursor. Recent image naming/high-quality enforcement and concurrency guidance changes have not been independently retested. Version 1.0.0 does not imply identical behavior across models or runners. The example has received the current payload; future Resources edits still need to be copied into consuming projects.
+The user has reported successful preparation, UX image generation, and incremental implementation in the example project, primarily in Cursor. Recent image naming/high-quality enforcement and concurrency guidance changes have not been independently retested. Version 1.0.0 does not imply identical behavior across models or runners. The example has received the current payload; future Pipeline edits still need to be copied into consuming projects.

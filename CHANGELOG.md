@@ -2,7 +2,7 @@
 
 ## Version convention
 
-Resources uses `MAJOR.MINOR.PATCH`. Earlier proof-of-concept releases used `MAJOR.MINOR.PATCH-poc.N`.
+Pipeline uses `MAJOR.MINOR.PATCH`. Earlier proof-of-concept releases used `MAJOR.MINOR.PATCH-poc.N`.
 
 - `0.x` is experimental: workflows and generated-document conventions may change. No compatibility guarantee is implied; migration-impacting changes are called out here.
 - During the proof of concept, increment `poc.N` for the next published iteration of the same intended release.
@@ -10,7 +10,7 @@ Resources uses `MAJOR.MINOR.PATCH`. Earlier proof-of-concept releases used `MAJO
 - After 1.0, increment MAJOR for incompatible public resource/workflow contracts, MINOR for compatible additions, and PATCH for compatible fixes.
 - Git release tags, when created, use `v` followed by the version. A changelog entry or tag does not establish operational verification.
 
-Version applies to the resources bundle, not the applications it prepares. Project readiness is reported separately as **specified**, **configured**, or **verified**, tied to evidence. Release versions reflect the maintained bundle; verification claims remain limited to recorded evidence.
+Version applies to the Pipeline bundle, not the applications it prepares. Project readiness is reported separately as **specified**, **configured**, or **verified**, tied to evidence. Release versions reflect the maintained bundle; verification claims remain limited to recorded evidence.
 
 ## 1.0.0 — 2026-10-04
 
@@ -53,8 +53,8 @@ First 1.0 release, designated by the project owner following successful user-run
 - Coordinator owns TASK.md and project AGENTS.md, discovers specialist roles, and stops unsupported requests instead of doing specialist work itself.
 - Retain focused PITCH, INTERFACE (formerly DESIGN), SYSTEMS (formerly ARCHITECTURE), and audit skills; add purposeful testing guidance. Templates accompany their roles or skills.
 - Move model utilities to `.github/skills/models/`; image mockup requests belong to Product Designer.
-- Import only `.github/`. Root AGENTS.md, README.md, and CHANGELOG.md are Resources development/usage files, not target-project instructions.
-- Replace rolling CHECKING.md with brief timestamped Coordinator project audits. Workers return evidence without automatic duplicate records; Resources maintenance does not trigger audits.
+- Import only `.github/`. Root AGENTS.md, README.md, and CHANGELOG.md are Pipeline development/usage files, not target-project instructions.
+- Replace rolling CHECKING.md with brief timestamped Coordinator project audits. Workers return evidence without automatic duplicate records; Pipeline maintenance does not trigger audits.
 - Migration: review obsolete `.github/agents/automation/` and `.github/models/` copies, merge the new payload, and reconcile existing DESIGN/ARCHITECTURE documents with their new names deliberately. Preserve unrelated project files and historical evidence.
 - Validation: role/skill structure and local references checked. Editor activation, routing, end-to-end project execution, and concurrent execution of this revised bundle remain unverified.
 

@@ -1,8 +1,8 @@
 # Working principles
 
-These instructions govern development of Resources. Import only `.cursor/` into consuming projects; do not copy this root file, README.md, or CHANGELOG.md. Coordinator templates generate project-specific instructions.
+These instructions govern development of Pipeline. Import only `.cursor/` into consuming projects; do not copy this root file, README.md, or CHANGELOG.md. Coordinator templates generate project-specific instructions.
 
-Resources provides reusable agent definitions and capabilities for focused development. Its purpose is to keep one agent from having to understand and solve an entire project at once. Judge pipeline decisions by whether they reduce unnecessary context, coordination, and work while delivering the requested outcome.
+Pipeline provides reusable agent definitions and capabilities for focused development. Its purpose is to keep one agent from having to understand and solve an entire project at once. Judge pipeline decisions by whether they reduce unnecessary context, coordination, and work while delivering the requested outcome.
 
 ## Agents and skills
 
@@ -24,7 +24,7 @@ Preparation remains a distinct phase. The coordinator discovers roles and their 
 
 Honor existing canonical locations and explicit user paths. Do not maintain duplicate authorities. Writing a specification does not authorize implementation. Missing material intent requires a focused question or an explicit unknown, not an invented requirement.
 
-Automatic effort audits apply to the shipped Coordinator's work in a consuming project, not to maintenance of Resources itself. Do not create an audit for routine work on this repository unless explicitly requested. Existing local notes are under `../../documents/audits/` relative to this checkout (the outer Resources folder); do not recreate `.project/documents/` here or move those notes back. In target projects, the Coordinator consolidates worker evidence into `.project/documents/audits/` unless the project specifies another location. Workers and document skills do not independently generate automatic effort logs.
+Automatic effort audits apply to the shipped Coordinator's work in a consuming project, not to maintenance of Pipeline itself. Do not create an audit for routine work on this repository unless explicitly requested. Existing local notes are under `../../documents/audits/` relative to this checkout (the outer Pipeline folder); do not recreate `.project/documents/` here or move those notes back. In target projects, the Coordinator consolidates worker evidence into `.project/documents/audits/` unless the project specifies another location. Workers and document skills do not independently generate automatic effort logs.
 
 ## Execution roles
 

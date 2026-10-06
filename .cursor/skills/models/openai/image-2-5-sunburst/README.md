@@ -10,7 +10,7 @@ The implementation follows the [OpenRouter Image API](https://openrouter.ai/docs
 
 ## First image
 
-From the target project root, after importing Resources' `.cursor` folder, run:
+From the target project root, after importing Pipeline's `.cursor` folder, run:
 
 ```bash
 python3 .cursor/skills/models/openai/image-2-5-sunburst/scripts/generate.py \

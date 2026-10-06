@@ -5,7 +5,7 @@ description: Record a Coordinator's substantial target-project effort, or an exp
 
 # Record a substantial effort
 
-Write a factual checkpoint for the Coordinator's target-project workflow or an explicit user request. Do not automatically audit maintenance of Resources, direct skill use, or individual worker assignments. Use at a milestone boundary or after an authorized coordinated project task changes files and completes, stops blocked, or is abandoned. Include consequential failures and their recovery in that record. An explicitly requested investigation or review audit is also in scope. Do not create a file for each read, tool call, trivial edit, or worker message. One coordinated effort should normally produce one record using the workers' concise results; a task and milestone completed together need only one. No hourly cadence, automatic commits, or progress screenshots.
+Write a factual checkpoint for the Coordinator's target-project workflow or an explicit user request. Do not automatically audit maintenance of Pipeline, direct skill use, or individual worker assignments. Use at a milestone boundary or after an authorized coordinated project task changes files and completes, stops blocked, or is abandoned. Include consequential failures and their recovery in that record. An explicitly requested investigation or review audit is also in scope. Do not create a file for each read, tool call, trivial edit, or worker message. One coordinated effort should normally produce one record using the workers' concise results; a task and milestone completed together need only one. No hourly cadence, automatic commits, or progress screenshots.
 
 ## Gather only what is needed
 
@@ -15,7 +15,7 @@ If asked to review document consistency, inspect the relevant sources and relati
 
 ## Write the record
 
-Adapt [the template](templates/AUDIT.md). Honor a target project's existing audit location or explicit destination; otherwise use the default below. The outer Resources development-notes folder is not a default for consuming projects. Obtain the actual current UTC time from the environment and create:
+Adapt [the template](templates/AUDIT.md). Honor a target project's existing audit location or explicit destination; otherwise use the default below. The outer Pipeline development-notes folder is not a default for consuming projects. Obtain the actual current UTC time from the environment and create:
 
 `<target>/.project/documents/audits/YYYY-MM-DDTHH-mm-ssZ-short-topic.md`
 
