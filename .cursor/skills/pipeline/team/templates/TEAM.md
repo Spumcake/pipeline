@@ -68,6 +68,8 @@ Tests each release candidate once, as a careful first-time user, and reports wha
   - **Anything blocking:** post the report on the issue and label it `blocked`. Open no pull request.
   - **Blocked by the team's own environment** (permissions, tools, usage limits): say so on the issue. Do not report it as an app failure.
 
+[PLACEHOLDER: additional roles this project needs, each as a ### heading with its responsibility, when it acts, what it reads, what it produces, and its limits. Delete this line when the two roles above are enough.]
+
 ## Reading the repository
 
 The repository describes itself in:
@@ -84,7 +86,7 @@ Work happens in GitHub: issues, labels, comments, and pull request descriptions.
 
 ## Access and limits
 
-The team reaches GitHub through the GitHub CLI (`gh`) and git, using a token in the `GH_TOKEN` environment variable. The owner provides it, and it is never written in chat, logs, or files. The token is a fine-grained token limited to this repository, with these repository permissions:
+Each member of the team reaches GitHub with credentials the owner provides, such as a fine-grained token used with git and the GitHub CLI. Credentials are never written in conversations, logs, issues, or files. They are limited to this repository, with these repository permissions:
 
 - **Contents:** Read-only
 - **Issues:** Read and write

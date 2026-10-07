@@ -20,7 +20,7 @@ Version applies to the Pipeline bundle, not the applications it prepares. Projec
 - Require audits to record the version and commit; the Coordinator may read the current commit and dirty state for that purpose only.
 - Add the candidate skill and workflow: `<version>-candidate.<n>` tags on `dev` pin the commit to `candidate/<tag>` and open a test-request issue. The user tags and merges.
 - Add a Documentation subagent and README skill modelled on mature open-source READMEs (badges, description, features, demo, stack, quick start, install, development, documentation, contributing, license). The Coordinator has it revisit the README before coordinated work is committed.
-- Add the Coordinator-owned **team** skill and template. It writes a project's root TEAM.md for the outside team that handles and tests commits: branches and tags, owner, version control and release-testing roles, labels, and access limits. The Coordinator treats that team's `blocked` and `ci-failure` issues as findings.
+- Add the Coordinator-owned **team** skill and template. The Coordinator advises on the outside team a project needs (people, agent teams such as Grok Bot, automated services, or a mix) and writes the project's root TEAM.md. TEAM.md covers branches and tags, the owner, version control and release-testing roles plus project-specific ones, labels, and access limits, and stays neutral about who fills each role. The Coordinator treats that team's `blocked` and `ci-failure` issues as findings. Usage step 1 in the README can ask what team the project needs.
 - Validation: YAML parsed and the issue script dry-run with a stubbed `gh`. No Cursor, GitHub Actions, or Grok trial has been run.
 
 ## 1.0.0 — 2026-10-04

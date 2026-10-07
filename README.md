@@ -18,10 +18,16 @@ cp -Ri "$pipeline_checkout/.cursor/." .cursor/
 
 Open the project in Cursor and start an Agent chat. Then send these briefs in order. Wait for each to finish before sending the next.
 
-1. **Ask the agent how it would approach your idea.** Describe the app in your own words: who it is for, what they need to do, where it runs, and what it should not do.
+1. **Ask the agent how it would approach your idea.** Describe the app in your own words: who it is for, what they need to do, where it runs, and what it should not do. Optionally, also ask what team you would need to handle and test its commits. That team can be people, a team of agents, automated services, or a mix.
 
    ```text
    @coordinator I want <your app: who uses it, what they need to do, where it runs, and anything it must not include>. How would you approach building this?
+   ```
+
+   Optionally add:
+
+   ```text
+   What team would be necessary to build this?
    ```
 
 2. **Ask the agent to prepare for implementation.**
