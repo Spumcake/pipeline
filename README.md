@@ -16,7 +16,7 @@ mkdir -p .cursor
 cp -Ri "$pipeline_checkout/.cursor/." .cursor/
 ```
 
-The agent sets up `worktrees/` from your app's repository URL, or creates a new app repository.
+If the team repository already exists, clone it instead, and ask the agent to set up the workspace (step 4 below) to recreate `worktrees/`.
 
 ## Usage
 
@@ -46,6 +46,12 @@ Open `<app>-team` in Cursor and start an Agent chat. Send each brief and wait fo
 
    ```text
    @coordinator Generate a series of images showing the app's main user journey, using our existing project documents and bootstrap images. I want to see how the screens and important interaction states connect, with a consistent visual design. Don't implement the app.
+   ```
+
+4. **Ask the agent to set up the workspace.** It checks out your app's repository under `worktrees/`, with a permanent `dev` folder, or creates a new app repository.
+
+   ```text
+   @coordinator Set up the workspace for <app repository URL, or "a new app repository">, and record the app repository in AGENTS.md. Tell me anything I need to create on GitHub.
    ```
 
 ---
