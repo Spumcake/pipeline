@@ -3,7 +3,7 @@ name: worktrees
 description: The project workspace layout — a team repository holding Pipeline and the project documents, with the app repository's branches checked out as worktrees inside it — and how worktrees are created, committed, verified, merged into dev, and cleaned up. Read before any work that touches files or Git.
 ---
 
-# Work in the team repository and its worktrees
+# The team repository
 
 Cursor opens the project's **team repository**, named `<app>-team`. It holds Pipeline, the working rules, TEAM.md, and the project documents. The app's own repository lives inside it under `worktrees/`, which the team repository ignores.
 
@@ -13,7 +13,7 @@ Cursor opens the project's **team repository**, named `<app>-team`. It holds Pip
   AGENTS.md                project working rules
   TEAM.md                  for the outside team that handles and tests commits
   .project/documents/      PITCH, INTERFACE, SYSTEMS, TASK, PLAN, TODO, TESTING, audits, archive, devlog
-  .project/presentation/   generated images and prompts
+  .project/visuals/        generated images and prompts
   .gitignore               includes worktrees/
   .cursorindexingignore    keeps duplicate checkouts out of Cursor's index
   worktrees/               app repository, ignored by the team repository
