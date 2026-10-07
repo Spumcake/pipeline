@@ -1,7 +1,7 @@
 # Release-candidate request.
 # Push a tag named <version>-candidate.<n> (for example 1.2.0-candidate.1) on a dev commit.
 # This pins that commit to the branch candidate/<tag> and opens a "Release test" issue for the tester.
-# Set PROJECT_DOCS_REPO to the project documents repository's URL, where TEAM.md and TESTING.md live.
+# Set TEAM_REPO to the team repository's URL, where TEAM.md and TESTING.md live.
 # Optionally set RELEASE_TESTER to the tester's GitHub login to mention and assign it.
 name: Candidate request
 
@@ -50,15 +50,15 @@ jobs:
           TESTER: ${{ vars.RELEASE_TESTER }}
           SHA: ${{ steps.tag.outputs.sha }}
           VERSION: ${{ steps.tag.outputs.version }}
-          DOCS_REPO: ${{ vars.PROJECT_DOCS_REPO }}
+          TEAM_REPO: ${{ vars.TEAM_REPO }}
         run: |
           gh label create release-test --color 2563EB --description "Release-candidate test request" 2>/dev/null || true
           gh label create blocked --color B91C1C --description "Release test found blocking failures" 2>/dev/null || true
 
           mention=""
           if [ -n "$TESTER" ]; then mention="@${TESTER} "; fi
-          docs="the project documents repository"
-          if [ -n "$DOCS_REPO" ]; then docs="${DOCS_REPO}"; fi
+          docs="the team repository"
+          if [ -n "$TEAM_REPO" ]; then docs="${TEAM_REPO}"; fi
 
           cat > body.md <<EOF
           ${mention}please release-test this candidate.

@@ -2,7 +2,7 @@
 
 **UTC:** [PLACEHOLDER: actual timestamp]
 **Scope/baseline:** [PLACEHOLDER: target and relevant inputs]
-**Version and commit:** [PLACEHOLDER: version from TASK or "not agreed"; short commit; "plus uncommitted changes" when the tree was dirty]
+**Version and commit:** [PLACEHOLDER: version from TASK or "not agreed"; verified app commit as short hash and subject line, or the last commit and "not committed" if work stopped earlier]
 **Outcome:** [PLACEHOLDER: completed, partial, blocked, or abandoned; what this describes]
 
 ## Goal and participants

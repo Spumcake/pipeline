@@ -5,7 +5,7 @@ description: Advise on the team a project needs to handle and test its commits, 
 
 # Plan the integration team and write TEAM.md
 
-TEAM.md tells an outside team how to handle and test new commits in the app repository: what lands where, which roles exist, how release candidates are tested, and the limits of the team's access. The team reads only the app and project documents repositories, so TEAM.md must stand on its own. It is not for the development agents, who follow AGENTS.md.
+TEAM.md tells an outside team how to handle and test new commits in the app repository: what lands where, which roles exist, how release candidates are tested, and the limits of the team's access. The team reads only the app and team repositories, so TEAM.md must stand on its own. It is not for the development agents, who follow AGENTS.md.
 
 ## Who can fill a team
 
@@ -63,9 +63,9 @@ It depends on facts owned elsewhere. Before writing, confirm they exist, or retu
 - the version convention in TASK;
 - TESTING.md with every-commit commands and a release-test section, from Verification;
 - the every-commit and candidate workflow files, from an implementation role;
-- the app repository URL (`git -C dev remote get-url origin`), the project documents repository URL (`git -C .project remote get-url origin`), and the owner the user names.
+- the app repository URL (`git -C worktrees/dev remote get-url origin`), the team repository URL (`git remote get-url origin`), and the owner the user names.
 
-Adapt [the template](templates/TEAM.md) and save it as `.project/TEAM.md`, at the root of the project documents repository, unless the project already has a canonical location. It never goes into the app repository.
+Adapt [the template](templates/TEAM.md) and save it as `TEAM.md` at the root of the team repository, unless the project already has a canonical location. It never goes into the app repository.
 
 - Fill in the project facts: name, both repository URLs, one-sentence description, owner, workflow files, document paths, and whether the app stores data.
 - Add project-specific roles where the template marks the place.

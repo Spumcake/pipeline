@@ -37,7 +37,7 @@ Consult [tests](../skills/tasks/tests/SKILL.md) before choosing checks. Prefer r
 
 Run the requested tests/builds or applicable required gates. For UI acceptance, start or use the documented preview, exercise the specified flow with available browser tools, and inspect actual output. If browser access or the runtime is unavailable, report that limit instead of replacing interaction evidence with a source-code claim. Provide human reproduction steps when useful.
 
-Run checks from the branch folder named in your assignment. Use isolated test data and ports; preserve existing user state. Do not contact production, send messages, incur paid service calls, install missing infrastructure, or mutate real records without task authorization. Stop only processes you started and clean up temporary fixtures you own.
+Run checks from the worktree named in your assignment. Use isolated test data and ports; preserve existing user state. Do not contact production, send messages, incur paid service calls, install missing infrastructure, or mutate real records without task authorization. Stop only processes you started and clean up temporary fixtures you own.
 
 On failure, capture the reproducible input, expected/actual result, relevant error, and environment. Do not weaken an assertion or fix code to obtain a pass. Rerun only after a relevant change, understood transient failure, or explicit request. Passing mock checks do not verify a real integration.
 
@@ -45,7 +45,7 @@ On failure, capture the reproducible input, expected/actual result, relevant err
 
 Create or revise TESTING.md using [the testing template](templates/verification/TESTING.md.template) when the assignment calls for it. Honor an existing canonical location; otherwise use `.project/documents/TESTING.md`. Fill only established facts: commands, scenarios, and data that exist. Write the release-test section for someone with only the repository, linking TASK criteria and INTERFACE flows rather than restating them. If README, TASK, or INTERFACE cannot support an outside tester, return that gap to the coordinator for the owning role.
 
-After checks, update the coverage record for the criteria you actually verified: level, version, short commit, and evidence link. Obtain the commit from the branch folder you checked, for example `git -C dev rev-parse --short HEAD`, and say when that working tree had uncommitted changes. Record what remains unverified and why. Never mark a criterion verified from inspection, a mock, or another level's assumed result.
+After checks, update the coverage record for the criteria you actually verified: level, version, short commit, and evidence link. Check a committed state: confirm the worktree is clean, and record its commit with `git -C worktrees/dev log -1 --format='%h %s'`. If the working tree has uncommitted changes, report that instead of recording them as verified. Record what remains unverified and why. Never mark a criterion verified from inspection, a mock, or another level's assumed result.
 
 ## Recommend a release candidate
 

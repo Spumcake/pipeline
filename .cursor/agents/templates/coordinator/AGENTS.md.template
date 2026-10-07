@@ -2,7 +2,7 @@
 
 [PLACEHOLDER: two sentences stating what is being built, for whom, and the agreed stack if one exists.] The full scope and acceptance criteria are in [PLACEHOLDER: TASK document path]. These are the shared working instructions for every agent on this project.
 
-**Workspace:** this file sits in `worktrees/`, beside Pipeline (`.cursor/`), the project documents repository (`.project/`), and one folder per app branch (`main/`, `dev/`, and temporary `work-<name>/` folders). Follow the **worktrees** skill. App changes go in the branch folder an assignment names; project documents never go into a branch. Only the branch-manager changes Git state, and the owner pushes. [PLACEHOLDER: app and project documents repository URLs once they exist.]
+**Workspace:** this is the team repository, which holds Pipeline (`.cursor/`), TEAM.md, and the project documents (`.project/`). The app repository is [PLACEHOLDER: app repository URL], checked out under `worktrees/` as described in the **worktrees** skill: `worktrees/dev/` permanently and `worktrees/work-<name>/` for concurrent assignments. App changes go in the worktree an assignment names; project documents never go into the app repository. Only the branch-manager changes Git state, and the owner pushes.
 
 **Language:** English for code, comments, documentation, logs, commit messages, and generation prompts, unless the project explicitly requires another language.
 

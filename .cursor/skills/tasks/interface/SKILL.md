@@ -7,7 +7,7 @@ description: Define views and user flows in INTERFACE.md, or create a sitemap, p
 
 Support two outcomes: interface documentation, or a requested series of images showing how someone uses the product. A document request does not authorize image generation. A request for UX images includes the sitemap and prompt preparation needed to produce them; do not stop at a list of prompts when generation was requested.
 
-Read the relevant pitch, existing interface decisions, and supplied references. Use the existing canonical interface document, otherwise `.project/documents/INTERFACE.md` in the project documents repository. If the project uses DESIGN.md, preserve it unless a rename is authorized. Adapt [the template](templates/INTERFACE.md) only where needed; do not rewrite finished specifications or create implementation plans as a side effect.
+Read the relevant pitch, existing interface decisions, and supplied references. Use the existing canonical interface document, otherwise `.project/documents/INTERFACE.md` in the team repository. If the project uses DESIGN.md, preserve it unless a rename is authorized. Adapt [the template](templates/INTERFACE.md) only where needed; do not rewrite finished specifications or create implementation plans as a side effect.
 
 ## Discover generation capability first
 

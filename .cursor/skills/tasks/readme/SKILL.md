@@ -16,9 +16,9 @@ Read only what the README needs:
 - TASK and TESTING for run, install, and check commands;
 - PLAN and audits only to tell completed features from planned ones;
 - existing LICENSE, CONTRIBUTING.md, SECURITY.md, and `docs/` files for links;
-- `git -C dev remote get-url origin` for the GitHub owner and repository name.
+- `git -C worktrees/dev remote get-url origin` for the GitHub owner and repository name.
 
-The README belongs to the app repository, at `dev/README.md` in the worktrees layout. Project documents live in a separate repository and are sources, not part of the app.
+The README belongs to the app repository, at `worktrees/dev/README.md`. Project documents live in the team repository and are sources, not part of the app.
 
 Treat the code as the authority when documents disagree, and report the disagreement. Use only commands recorded in TASK or TESTING or present in the project's manifests and scripts; never invent one. Release testing installs from this README on a fresh clone, so a wrong command will be found there.
 
@@ -35,7 +35,7 @@ Follow this order and omit any section with nothing true to say:
 7. **Quick start.** The fastest working path from nothing to the running app: prerequisites in one sentence, one command block, what to open, and what you should see.
 8. **Install**, when setting up for real use differs from the quick start: configuration, data location, running as a service. Add other project-specific sections, such as running on a server, only when the project has them.
 9. **Development.** A short source-layout block and the common check commands from TESTING.
-10. **Documentation.** Links to existing user-facing documents. Do not link the project documents repository unless the project makes it public.
+10. **Documentation.** Links to existing user-facing documents. Do not link the team repository unless the project makes it public.
 11. **Contributing and license.** Link CONTRIBUTING.md and SECURITY.md when they exist. Name the license from the LICENSE file. If there is no license, do not choose one; omit the license line and report the missing decision.
 
 ## Size and voice
@@ -46,7 +46,7 @@ Model the length on a mature open-source README: usually 300–1,300 words, scal
 
 When work is about to be committed, reconcile the README with what changed:
 
-1. Find what changed since the README was last updated: `git -C dev log -1 --format=%h -- README.md` for the baseline, then `git -C dev diff --stat <baseline>` plus uncommitted changes.
+1. Find what changed since the README was last updated: `git -C worktrees/dev log -1 --format=%h -- README.md` for the baseline, then `git -C worktrees/dev diff --stat <baseline>` plus uncommitted changes.
 2. Check only the sections those changes could affect: a new or removed feature, a dependency or stack change, a changed command, port, path, or configuration, a new document, license, or contributing file.
 3. Edit only those sections. If nothing in the README is affected, leave it untouched and say so.
 
