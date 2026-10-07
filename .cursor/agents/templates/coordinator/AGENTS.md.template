@@ -38,4 +38,6 @@ Testing levels, every-commit commands, the release-test brief, and the record of
 
 [PLACEHOLDER: concise, established limits on working directories, shared data, spending, external actions, commits, and releases. Preserve actual authorization; do not invent budgets, schedules, or unattended-operation rules.]
 
+[PLACEHOLDER: keep when TEAM.md exists] TEAM.md is addressed to the outside team that handles and tests commits. Development agents do not take its roles; they read its `blocked` and `ci-failure` issues as findings when assigned.
+
 Keep secrets out of output and version control.
