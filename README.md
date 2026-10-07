@@ -16,15 +16,17 @@ cp -Ri "$pipeline_checkout/.cursor/." .cursor/
 
 ## Usage
 
-Open the project in Cursor and start an Agent chat. Then send these briefs in order. Wait for each to finish before sending the next.
+Open the project in Cursor and start an Agent chat. Send each brief and wait for it to finish before sending the next.
 
-1. **Ask the agent how it would approach your idea.** Describe the app in your own words: who it is for, what they need to do, where it runs, and what it should not do. Optionally, also ask what team you would need to handle and test its commits. That team can be people, a team of agents, automated services, or a mix.
+### Preparation
+
+1. **Ask the agent how it would approach your idea.** Describe the app in your own words: who it is for, what they need to do, where it runs, and what it should not do.
 
    ```text
    @coordinator I want <your app: who uses it, what they need to do, where it runs, and anything it must not include>. How would you approach building this?
    ```
 
-   Optionally add:
+   Optionally add the question below. The team handles and tests commits, and can be people, a team of agents, automated services, or a mix.
 
    ```text
    What team would be necessary to build this?
@@ -42,24 +44,52 @@ Open the project in Cursor and start an Agent chat. Then send these briefs in or
    @coordinator Generate a series of images showing the app's main user journey, using our existing project documents and bootstrap images. I want to see how the screens and important interaction states connect, with a consistent visual design. Don't implement the app.
    ```
 
-4. **Discuss the scope with the agent.** Talk through what you want built and what the finished app looks like. The agent uses this conversation as context for the next briefs.
+### Working with an agent team
 
-5. **Ask the agent to recommend a vertical slice.**
+These steps set up an agent team, such as Grok Bot, to handle and test your commits from GitHub. Skip them if you test on your own. If there is no code to check yet, come back here after the first slice.
+
+1. **Ask the agent to set up the team's side of the project.**
+
+   ```text
+   @coordinator Set up version control and integration for an outside team that handles and tests our commits. Agree the version with me, have the roles prepare TESTING.md and the every-commit and candidate workflows, and write TEAM.md. Tell me what I need to set up in GitHub.
+   ```
+
+2. **Push the project to GitHub,** with the work on a `dev` branch, and make the GitHub settings the agent listed.
+
+3. **Create a GitHub token** for the team: a fine-grained token limited to the project's repository, with the permissions listed in TEAM.md.
+
+4. **Give the token to the bots as an environment variable.** In Grok Bot, say "I need an environment variable" and enter `GH_TOKEN` in the masked input it returns. Never paste the token into a chat.
+
+5. **Ask a bot to build the team.**
+
+   ```text
+   Clone <repository URL>, read TEAM.md, and create the bots, skills, and routines needed to fill the roles it describes. Use GH_TOKEN for GitHub. Tell me what else you need from me, then show me how each role will work before it acts on its own.
+   ```
+
+### Implementation
+
+1. **Discuss the scope with the agent.** Talk through what you want built and what the finished app looks like. The agent uses this conversation as context for the next briefs.
+
+2. **Ask the agent to recommend a vertical slice.**
 
    ```text
    @coordinator Based on our existing specifications, recommend the next vertical slice that I can try myself. Explain what that slice would let me do, what it depends on, and how we would know it works. Explain what subagents and skills you'd use. Keep this conversational. Don't create or edit files or begin implementation yet.
    ```
 
-6. **Ask the agent for a plan and todo list.**
+3. **Ask the agent for a plan and todo list.**
 
    ```text
    @coordinator Review the decisions recorded in the devlogs (if available) and our existing specifications to create an implementation plan and a short, prioritized todo list. Start with the agreed vertical slice, make its completion criteria clear, and keep later work broad. Don't implement anything yet; flag any consequential gaps rather than inventing decisions.
    ```
 
-7. **Ask the agent to implement the slice.**
+4. **Ask the agent to implement the slice.**
 
    ```text
    @coordinator Implement the agreed vertical slice from our plan, using the available agents and working rules. Verify its completion criteria and leave it runnable with clear instructions so I can try it. Use concurrent implementation workers where the slice has independent parts, with clear ownership and an integration step. Update the todos, plan status, and audit with what actually happened, then stop before starting the next slice.
    ```
 
-Try the slice, then repeat the last three briefs for each slice that follows.
+5. **Try the slice, then commit and push it to `dev`.** If you have a team, it checks every commit and opens a `ci-failure` issue when checks fail.
+
+6. **Tag a release candidate when the agent recommends one.** Run the tag commands it gives you. The team tests that commit and opens a pull request to `main` for you to review and merge, or labels the request `blocked` with its report. Ask the agent to record the result.
+
+Repeat steps 2 to 6 for each slice that follows.
