@@ -27,7 +27,7 @@ Bootstrap or approved images are optional inputs, not prerequisites. Check suppl
 
 Create one saved prompt per planned image in the format required by the discovered model skill. Specify the view's purpose, visible UI, interaction state, sample content, and what must stay consistent with the base. Use fictional sample data. Choose supported dimensions and aspect ratio for the actual layout. Image quality must always be high; never use medium, low, or an unspecified provider default. If the discovered generator cannot supply high quality, report that limitation rather than downgrade.
 
-Keep prompts, images, and generation records under the project's existing artifact convention. Otherwise use `.project/models/<provider>/<model>/<view-id>/`. In INTERFACE.md, link each view's prompt and, once available, its image and native run record. Briefly state the base dependency and the action connecting it to the next view; do not duplicate entire prompts there.
+Keep prompts, images, and generation records under the project's existing artifact convention. Otherwise use `.project/visuals/<provider>/<model>/<view-id>/` in the team repository. In INTERFACE.md, link each view's prompt and, once available, its image and native run record. Briefly state the base dependency and the action connecting it to the next view; do not duplicate entire prompts there.
 
 ## Generate the series
 
