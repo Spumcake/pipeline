@@ -1,11 +1,11 @@
 ---
 name: team
-description: Advise on the team a project needs to handle and test its commits, and create or update its root TEAM.md — branches and tags, owner, roles fitted to the project, labels, and access limits. Coordinator-owned. TEAM.md stays neutral about whether roles are filled by people, agents, or services.
+description: Advise on the team a project needs to handle and test its commits, and create or update its TEAM.md — branches and tags, owner, roles fitted to the project, labels, and access limits. Coordinator-owned. TEAM.md stays neutral about whether roles are filled by people, agents, or services.
 ---
 
 # Plan the integration team and write TEAM.md
 
-TEAM.md tells an outside team how to handle and test new commits in this repository: what lands where, which roles exist, how release candidates are tested, and the limits of the team's access. The team reads only the repository, so TEAM.md must stand on its own. It is not for the development agents, who follow AGENTS.md.
+TEAM.md tells an outside team how to handle and test new commits in the app repository: what lands where, which roles exist, how release candidates are tested, and the limits of the team's access. The team reads only the app and project documents repositories, so TEAM.md must stand on its own. It is not for the development agents, who follow AGENTS.md.
 
 ## Who can fill a team
 
@@ -63,11 +63,11 @@ It depends on facts owned elsewhere. Before writing, confirm they exist, or retu
 - the version convention in TASK;
 - TESTING.md with every-commit commands and a release-test section, from Verification;
 - the every-commit and candidate workflow files, from an implementation role;
-- the repository URL from `git remote get-url origin`, and the owner the user names.
+- the app repository URL (`git -C dev remote get-url origin`), the project documents repository URL (`git -C .project remote get-url origin`), and the owner the user names.
 
-Adapt [the template](templates/TEAM.md) and save it at the repository root as `TEAM.md`, unless the project already has a canonical location.
+Adapt [the template](templates/TEAM.md) and save it as `.project/TEAM.md`, at the root of the project documents repository, unless the project already has a canonical location. It never goes into the app repository.
 
-- Fill in the project facts: name, repository, one-sentence description, owner, workflow files, document paths, and whether the app stores data.
+- Fill in the project facts: name, both repository URLs, one-sentence description, owner, workflow files, document paths, and whether the app stores data.
 - Add project-specific roles where the template marks the place.
 - Keep the rest of the template's wording unless the project's flow actually differs.
 - Use only established facts. Leave a placeholder out rather than guessing a workflow name, path, or owner.

@@ -18,7 +18,7 @@ Own the repository's public README.md, and other user-facing documents under `do
 
 ## Establish prerequisites
 
-Read the assignment and use the **readme** skill. Read only the sources it lists for the sections in question. Use terminal access for read-only inspection: `git log`, `git diff`, `git status`, `git remote get-url`, and reading manifests. Do not install, build, run the app, or run tests; command evidence comes from TASK, TESTING, and audits.
+Read the assignment and use the **readme** skill. Read only the sources it lists for the sections in question. The README is the app's, at `dev/README.md` in the worktrees layout. Use terminal access for read-only inspection from that folder: `git -C dev log`, `diff`, `status`, `remote get-url`, and reading manifests. Do not install, build, run the app, or run tests; command evidence comes from TASK, TESTING, and audits.
 
 If the README cannot be accurate without a decision or fact you do not own, such as a license, a demo URL, a Discord invite, or a command nobody has run, leave that part out and return the gap to the coordinator.
 

@@ -51,9 +51,10 @@ When assigned, Verification reads the tester's report from the pull request or i
 
 ## Install the workflow
 
-This is one-time setup per project, done by an implementation role when assigned. Copy [the workflow](templates/candidate.yml) to `.github/workflows/candidate.yml` without project-specific changes. Then report what only the user can set up:
+This is one-time setup per project, done by an implementation role when assigned. Copy [the workflow](templates/candidate.yml) into the app repository at `dev/.github/workflows/candidate.yml` without project-specific changes. Then report what only the user can set up:
 
 - the outside team's access to this repository: a fine-grained token for the GitHub CLI, with the permissions listed in the project's TEAM.md. The Coordinator writes TEAM.md with the **team** skill;
+- the repository variable `PROJECT_DOCS_REPO`, set to the project documents repository's URL, so request issues tell the tester where TESTING.md and TEAM.md are;
 - the optional repository variable `RELEASE_TESTER`, only when the tester has its own GitHub account to mention and assign.
 
 Do not create accounts, tokens, or repository settings. Whether the tester picks up requests reliably is unconfirmed until a first trial; report the trial's outcome honestly.
