@@ -10,7 +10,7 @@ Pipeline lives in a team repository for your project, `<app>-team`, which also h
 mkdir <app>-team && cd <app>-team && git init
 printf 'worktrees/\n' > .gitignore
 pipeline_checkout="$(mktemp -d)"
-git clone --depth 1 --filter=blob:none --sparse https://github.com/Spumcake/Pipeline.git "$pipeline_checkout"
+git clone --depth 1 --filter=blob:none --sparse https://github.com/Spumcake/spum-pipeline.git "$pipeline_checkout"
 git -C "$pipeline_checkout" sparse-checkout set .cursor
 mkdir -p .cursor
 cp -Ri "$pipeline_checkout/.cursor/." .cursor/
