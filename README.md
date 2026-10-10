@@ -1,14 +1,16 @@
-# Pipeline
+# spum-pipeline
 
-Pipeline is a set of Cursor agents, rules, and skills that take a software idea from a short brief through specification, design, and incremental implementation. A coordinator splits the work into small tasks, each with limited context, a clear owner, and checks.
+spum-pipeline is a set of Cursor agents, rules, and skills that take a software idea from a short brief through specification, design, and incremental implementation. A coordinator splits the work into small tasks, each with limited context, a clear owner, and checks.
 
 ## Quick start
 
-Pipeline lives in a team repository for your project, `<app>-team`, which also holds the project documents. Your app's own repository is checked out inside it under `worktrees/`, which the team repository ignores. Create the team repository and copy in the `.cursor/` folder:
+Copy only `.cursor/`; this repository’s root AGENTS.md and README.md describe maintaining spum-pipeline and are not project templates.
+
+The installed pipeline lives in a team repository for your project, `<app>-team`, which also holds the project documents. Your app's own repository is checked out inside it under `src/<repo>/worktrees/`, which the team repository ignores. Create the team repository and copy in the `.cursor/` folder:
 
 ```sh
 mkdir <app>-team && cd <app>-team && git init
-printf 'worktrees/\n' > .gitignore
+printf '/src/\n' >> .gitignore
 pipeline_checkout="$(mktemp -d)"
 git clone --depth 1 --filter=blob:none --sparse https://github.com/Spumcake/spum-pipeline.git "$pipeline_checkout"
 git -C "$pipeline_checkout" sparse-checkout set .cursor
@@ -16,7 +18,7 @@ mkdir -p .cursor
 cp -Ri "$pipeline_checkout/.cursor/." .cursor/
 ```
 
-If the team repository already exists, clone it instead, and ask the agent to set up the workspace (step 4 below) to recreate `worktrees/`.
+If the team repository already exists, clone it instead, and ask the agent to set up the workspace (step 4 below) to recreate the app worktrees under `src/`.
 
 ## Usage
 
@@ -27,7 +29,7 @@ Open `<app>-team` in Cursor and start an Agent chat. Send each brief and wait fo
 1. **Ask the agent how it would approach your idea.** Describe the app in your own words: who it is for, what they need to do, where it runs, and what it should not do.
 
    ```text
-   @coordinator I want <your app: who uses it, what they need to do, where it runs, and anything it must not include>. How would you approach building this?
+   @development I want <your app: who uses it, what they need to do, where it runs, and anything it must not include>. How would you approach building this?
    ```
 
    Optionally add the question below. The team handles and tests commits, and can be people, a team of agents, automated services, or a mix.
@@ -39,19 +41,19 @@ Open `<app>-team` in Cursor and start an Agent chat. Send each brief and wait fo
 2. **Ask the agent to prepare for implementation.**
 
    ```text
-   @coordinator Go ahead and complete the preparation needed to make this ready for implementation, using the available roles. Reuse existing work, resolve what you can, and ask me only about decisions that genuinely need my input. Stop before writing application code, and summarize what's ready and anything still blocking implementation.
+   @development Go ahead and complete the preparation needed to make this ready for implementation, using the available roles. Reuse existing work, resolve what you can, and ask me only about decisions that genuinely need my input. Stop before writing application code, and summarize what's ready and anything still blocking implementation.
    ```
 
 3. **Ask the agent for images of the user journey (optional).**
 
    ```text
-   @coordinator Generate a series of images showing the app's main user journey, using our existing project documents and bootstrap images. I want to see how the screens and important interaction states connect, with a consistent visual design. Don't implement the app.
+   @development Generate a series of images showing the app's main user journey, using our existing project documents and any available reference images. I want to see how the screens and important interaction states connect, with a consistent visual design. Don't implement the app.
    ```
 
-4. **Ask the agent to set up the workspace.** It checks out your app's repository under `worktrees/`, with a permanent `dev` folder, or creates a new app repository.
+4. **Ask the agent to set up the workspace.** It checks out your app's repository under `src/<repo>/worktrees/`, with a permanent `dev` folder, or creates a new app repository.
 
    ```text
-   @coordinator Set up the workspace for <app repository URL, or "a new app repository">, and record the app repository in AGENTS.md. Tell me anything I need to create on GitHub.
+   @development Set up the workspace for <app repository URL, or "a new app repository">, and record the app repository in AGENTS.md. Tell me anything I need to create on GitHub.
    ```
 
 ---
@@ -63,7 +65,7 @@ These steps set up an agent team, such as Grok Bot, to handle and test your comm
 1. **Ask the agent to set up the team's side of the project.**
 
    ```text
-   @coordinator Set up version control and integration for an outside team that handles and tests our commits. Agree the version with me, have the roles prepare TESTING.md and the every-commit and candidate workflows, and write TEAM.md. Tell me what I need to set up in GitHub.
+   @development Set up version control and integration for an outside team that handles and tests our commits. Agree the version with me, have the roles prepare the testing record, staged-file pre-commit hook, and every-commit and candidate workflows, and write TEAM.md. Tell me what I need to set up in GitHub.
    ```
 
 2. **Push both repositories to GitHub:** the app repository, with `main` and `dev`, and `<app>-team`. Then make the GitHub settings the agent listed.
@@ -87,23 +89,31 @@ These steps set up an agent team, such as Grok Bot, to handle and test your comm
 2. **Ask the agent to recommend a vertical slice.**
 
    ```text
-   @coordinator Based on our existing specifications, recommend the next vertical slice that I can try myself. Explain what that slice would let me do, what it depends on, and how we would know it works. Explain what subagents and skills you'd use. Keep this conversational. Don't create or edit files or begin implementation yet.
+   @development Based on our existing specifications, recommend the next vertical slice that I can try myself. Explain what that slice would let me do, what it depends on, and how we would know it works. Explain what subagents and skills you'd use. Keep this conversational. Don't create or edit files or begin implementation yet.
    ```
 
 3. **Ask the agent for a plan and todo list.**
 
    ```text
-   @coordinator Review the decisions recorded in the devlogs (if available) and our existing specifications to create an implementation plan and a short, prioritized todo list. Start with the agreed vertical slice, make its completion criteria clear, and keep later work broad. Don't implement anything yet; flag any consequential gaps rather than inventing decisions.
+   @development Review the decisions recorded in the devlogs (if available) and our existing specifications to create an implementation plan and a short, prioritized todo list. Start with the agreed vertical slice, make its completion criteria clear, and keep later work broad. Don't implement anything yet; flag any consequential gaps rather than inventing decisions.
    ```
 
 4. **Ask the agent to implement the slice.**
 
    ```text
-   @coordinator Implement the agreed vertical slice from our plan, using the available agents and working rules. Verify its completion criteria and leave it runnable with clear instructions so I can try it. Use concurrent implementation workers where the slice has independent parts, with clear ownership and an integration step. Update the todos, plan status, and audit with what actually happened, then stop before starting the next slice.
+   @development Implement the agreed vertical slice from our plan, using the available agents and working rules. Verify its completion criteria and leave it runnable with clear instructions so I can try it. Use concurrent implementation workers where the slice has independent parts, with clear ownership and an integration step. Update the todos and plan status; write one consolidated audit if this completes a milestone, then stop before starting the next slice.
    ```
 
-5. **Try the slice, then push `dev` and the team repository.** The agents commit locally; you push. If you have a team, it checks every commit and opens a `ci-failure` issue when checks fail.
+5. **Try the slice, then request a commit when ready.** The implementing workers run affected checks. Ask `@development` to have the Branch Manager commit and integrate the assigned changes; a configured pre-commit hook checks staged contents and blocks failures. You push `dev` and the team repository. Configured CI repeats the deterministic checks, and an outside team can track failures in `ci-failure` issues. Completed work is not automatically committed.
 
 6. **Tag a release candidate when the agent recommends one.** Run the tag commands it gives you. The team tests that commit and opens a pull request to `main` for you to review and merge, or labels the request `blocked` with its report. Ask the agent to record the result.
 
 Repeat steps 2 to 6 for each slice that follows.
+
+## Project records and checks
+
+New projects keep development records under `.project/documents/development/`: `tasks.md`, `systems.md`, `plan.md`, `todo.md`, and `testing.md`, with audits and archives alongside them. Product intent defaults to `.project/documents/PITCH.md`; the interface defaults to root `INTERFACE.md`. Existing canonical paths and inline apps remain in place until a migration is authorized.
+
+The coordinator is the main conversation operating through `@development`. Product Designer, Technical Planner, Task Operations, Code Review, Verification, and Branch Manager handle bounded assignments. The pipeline supports multiple app repositories; every implementation assignment names its repository and worktree.
+
+Implementers run affected checks. Verification handles requested acceptance journeys, browser interactions, and release evidence without routinely repeating passing unit checks. Hooks and CI must be installed before their coverage can be claimed. Release testing uses an agreed version and a fresh clone of one candidate. Document and pipeline maintenance needs no app Verification run or automatic audit; audits consolidate milestones or coordinated work that stops blocked or abandoned.

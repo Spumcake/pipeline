@@ -4,7 +4,7 @@
 
 **Sources:** [PLACEHOLDER: pitch, design if applicable, systems, and working instructions]
 **Objective and exclusions:** [PLACEHOLDER: smallest complete user/caller journey, release scope, and non-goals]
-**Version convention:** [PLACEHOLDER: version scheme, current version, proof-of-concept/prerelease status, compatibility, and intended release channel. Release candidates are tagged `<version>-candidate.<n>` on `dev` and need an agreed version.]
+**Version convention:** [PLACEHOLDER: version scheme, proof-of-concept/prerelease status, compatibility, and intended release channel. Candidates need an agreed version and use `<version>-candidate.<n>`]
 
 ## Planning and execution
 
@@ -16,10 +16,10 @@
 
 ## Development and preview
 
-[PLACEHOLDER: applicable setup/launch/build procedures and prerequisites, run from `worktrees/dev/`; label unexecuted commands. Preview scenario, sample data, expected result, readiness, reset/shutdown, and real versus simulated boundaries.]
+[PLACEHOLDER: applicable setup/launch/build procedures and prerequisites; label unexecuted commands. Preview scenario, sample data, expected result, readiness, reset/shutdown, and real versus simulated boundaries.]
 
 ## Verification and delivery
 
-[PLACEHOLDER: existing required checks and justified new checks; explain any real-service or human-review limits. Reference the testing skill when defining tests. Link TESTING.md for check levels and the coverage record if it exists; do not duplicate it.]
+[PLACEHOLDER: existing required checks and justified new checks; explain any real-service or human-review limits. Reference the testing skill when defining tests. Link the Verification-owned testing record for check levels and coverage rather than duplicating it.]
 
 [PLACEHOLDER: deliverable, done/deployed conditions, release prerequisites/authority, and unresolved decisions affecting the next increment. Link timestamped audits for actual results; do not duplicate their histories.]

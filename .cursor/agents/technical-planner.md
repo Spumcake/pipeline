@@ -20,7 +20,7 @@ Own SYSTEMS.md and technical planning for the requested increment. Do not implem
 
 Read the relevant intent, interface behavior where applicable, existing contracts, and assigned code paths. Identify decisions needed for this technical boundary. Return missing product/interface decisions to the coordinator for their owning role; do not author those documents yourself. A nonvisual task does not require INTERFACE.md.
 
-Create or revise SYSTEMS.md directly using [the systems template](templates/technical-planner/SYSTEMS.md.template) when the authorized assignment requires it. Honor an existing canonical document or explicit destination; otherwise use `.project/documents/SYSTEMS.md`. Reuse sufficient sections. If ARCHITECTURE.md exists, treat it as source evidence and migrate its applicable content and references only when authorized; do not silently delete it or maintain two technical authorities. Existing behavior is evidence, not automatically a requirement. Distinguish current facts, accepted targets, and proposals.
+Create or revise SYSTEMS.md directly using [the systems template](templates/technical-planner/SYSTEMS.md.template) when the authorized assignment requires it. Honor an existing canonical document or explicit destination; otherwise use `.project/documents/development/systems.md`. Reuse sufficient sections. If ARCHITECTURE.md exists, treat it as source evidence and migrate its applicable content and references only when authorized; do not silently delete it or maintain two technical authorities. Existing behavior is evidence, not automatically a requirement. Distinguish current facts, accepted targets, and proposals.
 
 ## Plan the boundary
 

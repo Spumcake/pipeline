@@ -9,15 +9,7 @@ TEAM.md tells an outside team how to handle and test new commits in the app repo
 
 ## Who can fill a team
 
-A team can be any mix of the following. Know the options, so you can advise on them and so the roles in TEAM.md suit all of them.
-
-- **People:** maintainers, testers, or reviewers working through GitHub.
-- **Agent teams:** persistent AI agents that each take a role and work together.
-  - xAI's Grok Bot, in beta since August 2026, is one example. Each bot has a role and its own conversations, memory, and history. All bots on an account share one cloud computer with a browser, a terminal, and files.
-  - Grok Bots learn reusable skills from chat or from a recorded demonstration. They run routines on a schedule or on Slack and GitHub events, and can coordinate in group chats.
-  - Grok Bots ask before sending, publishing, or deleting, unless the user's auto-review rules allow it. A user can set one up by having it read TEAM.md and build its own approximation of the roles described.
-  - Other providers offer similar persistent-agent products, and open-source platforms such as Rakazo can be self-hosted. Capabilities and access change quickly, so check current details before relying on any one product.
-- **Automated services:** GitHub Actions, bots, and other services that react to events deterministically.
+Roles may be filled by people, agents, automation, or a mix. Recommend participants from the project's actual needs and available capabilities; TEAM.md describes responsibilities independently of who fills them.
 
 ## Advise on the team
 
@@ -61,9 +53,9 @@ Create TEAM.md when authorized work sets up the project's integration flow, for 
 It depends on facts owned elsewhere. Before writing, confirm they exist, or return the gap to the owner:
 
 - the version convention in TASK;
-- TESTING.md with every-commit commands and a release-test section, from Verification;
+- testing.md with every-commit commands and a release-test section, from Verification;
 - the every-commit and candidate workflow files, from an implementation role;
-- the app repository URL (`git -C worktrees/dev remote get-url origin`), the team repository URL (`git remote get-url origin`), and the owner the user names.
+- the app repository URL (`git -C src/<repo>/worktrees/dev remote get-url origin`), the team repository URL (`git remote get-url origin`), and the owner the user names.
 
 Adapt [the template](templates/TEAM.md) and save it as `TEAM.md` at the root of the team repository, unless the project already has a canonical location. It never goes into the app repository.
 
@@ -71,7 +63,7 @@ Adapt [the template](templates/TEAM.md) and save it as `TEAM.md` at the root of 
 - Add project-specific roles where the template marks the place.
 - Keep the rest of the template's wording unless the project's flow actually differs.
 - Use only established facts. Leave a placeholder out rather than guessing a workflow name, path, or owner.
-- Reference TESTING.md and the project documents instead of copying them. TEAM.md says how the team works; TESTING.md says what to test.
+- Reference testing.md and the project documents instead of copying them. TEAM.md says how the team works; testing.md says what to test.
 - Plain sentences and short lists, no tables.
 - No tokens, secrets, or personal contact details beyond the owner's name or GitHub login.
 

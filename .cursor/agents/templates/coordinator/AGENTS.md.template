@@ -2,8 +2,6 @@
 
 [PLACEHOLDER: two sentences stating what is being built, for whom, and the agreed stack if one exists.] The full scope and acceptance criteria are in [PLACEHOLDER: TASK document path]. These are the shared working instructions for every agent on this project.
 
-**Workspace:** this is the team repository, which holds Pipeline (`.cursor/`), TEAM.md, and the project documents (`.project/`). The app repository is [PLACEHOLDER: app repository URL], checked out under `worktrees/` as described in the **worktrees** skill: `worktrees/dev/` permanently and `worktrees/work-<name>/` for concurrent assignments. App changes go in the worktree an assignment names; project documents never go into the app repository. Only the branch-manager changes Git state, and the owner pushes.
-
 **Language:** English for code, comments, documentation, logs, commit messages, and generation prompts, unless the project explicitly requires another language.
 
 ## 1. Starting and resuming work
@@ -26,20 +24,20 @@ The coordinator divides work into bounded assignments and integrates the results
 
 PLAN describes milestones and dependencies; TODO is the short checklist of current work. The coordinator uses the **plan** and **todo** skills when their creation is needed within authorized work, and maintains them as progress or blockers change. Write important decisions into their owning document when settled; conversation alone is not a durable record.
 
-The coordinator uses the **audit** skill for one brief timestamped record at a milestone boundary or when coordinated work that changed files completes, stops blocked, or is abandoned. Record actual participants, significant attempts, results, and remaining work. Preserve earlier audits. Workers supply evidence rather than separate logs. No hourly updates or progress screenshots are required.
+The coordinator uses the **audit** skill for one brief timestamped record at a milestone boundary or when coordinated work stops blocked or is abandoned. Record actual participants, significant attempts, results, and remaining work. Preserve earlier audits. Workers supply evidence rather than separate logs. No hourly updates or progress screenshots are required.
 
 ## 5. Verification
 
 Keep the existing working user journey intact. Use the **tests** skill when writing, changing, or reviewing tests. Verify the changed behavior and its relevant failure cases; do not multiply tests or repeat passing checks without a concrete reason. Report what was implemented, what was actually checked, and what remains unverified. Never invent user approval.
 
-Testing levels, every-commit commands, the release-test brief, and the record of what was verified at which commit are in [PLACEHOLDER: TESTING path, if it exists]. Before work is committed, the README is revisited so it matches the code. Release candidates are tagged by the user only; agents recommend them.
-
 [PLACEHOLDER: name the project's essential working journey and any established runtime precautions that apply broadly. Link commands or detailed procedures rather than duplicating them. Omit if not established.]
+
+Commits happen only when the user asks. Only the branch-manager changes Git state. Implementers run affected checks; configured hooks check staged contents and CI repeats deterministic checks. Verification handles requested acceptance journeys without routinely repeating the unit suite. Pipeline/document-only maintenance needs no application Verification run or audit. Do not claim automation exists until installed.
+
+For separate app repositories, assignments name `src/<repo>/worktrees/dev/` or an isolated worktree; project documents remain in the team repository. Preserve an existing inline app until migration is authorized.
 
 ## 6. Boundaries
 
 [PLACEHOLDER: concise, established limits on working directories, shared data, spending, external actions, commits, and releases. Preserve actual authorization; do not invent budgets, schedules, or unattended-operation rules.]
-
-[PLACEHOLDER: keep when TEAM.md exists] TEAM.md is addressed to the outside team that handles and tests commits. Development agents do not take its roles; they read its `blocked` and `ci-failure` issues as findings when assigned.
 
 Keep secrets out of output and version control.

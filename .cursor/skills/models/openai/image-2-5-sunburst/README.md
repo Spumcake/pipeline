@@ -10,13 +10,13 @@ The implementation follows the [OpenRouter Image API](https://openrouter.ai/docs
 
 ## First image
 
-From the target project root, after importing Pipeline's `.cursor` folder, run:
+From the target project root, after importing Resources' `.cursor` folder, run:
 
 ```bash
 python3 .cursor/skills/models/openai/image-2-5-sunburst/scripts/generate.py \
-  --config .project/visuals/image-config.json \
-  --prompts .project/visuals/image2-prompts/01-desk-overview.md \
-  --output .project/visuals/generated
+  --config .project/presentation/image-config.json \
+  --prompts .project/presentation/image2-prompts/01-desk-overview.md \
+  --output .project/presentation/generated
 ```
 
 This is an offline dry run. Add `--execute --max-requests 1` to generate the first image when authorized. Prompt files can be plain text or Markdown; when an exact `## Prompt` heading exists, only its following content is sent.

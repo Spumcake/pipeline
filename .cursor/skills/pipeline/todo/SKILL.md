@@ -5,7 +5,7 @@ description: Create or update a short prioritized checklist of near-term work wh
 
 # Write a short, human-readable todo list
 
-Use this skill when authorized work needs a prioritized task list or an update to one. Do not create TODO.md just because the pipeline is installed, specifications exist, or the file is missing. Preserve an existing canonical location; the default is `.project/documents/TODO.md`.
+Use this skill when authorized work needs a prioritized task list or an update to one. Do not create TODO.md just because the pipeline is installed, specifications exist, or the file is missing. Preserve an existing canonical location; the default is `.project/documents/development/todo.md`.
 
 ## Preserve earlier work
 

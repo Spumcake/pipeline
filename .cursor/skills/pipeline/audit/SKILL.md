@@ -5,7 +5,7 @@ description: Record a Coordinator's substantial target-project effort, or an exp
 
 # Record a substantial effort
 
-Write a factual checkpoint for the Coordinator's target-project workflow or an explicit user request. Do not automatically audit maintenance of Pipeline, direct skill use, or individual worker assignments. Use at a milestone boundary or after an authorized coordinated project task changes files and completes, stops blocked, or is abandoned. Include consequential failures and their recovery in that record. An explicitly requested investigation or review audit is also in scope. Do not create a file for each read, tool call, trivial edit, or worker message. One coordinated effort should normally produce one record using the workers' concise results; a task and milestone completed together need only one. No hourly cadence, automatic commits, or progress screenshots.
+Write a factual checkpoint for the Coordinator's target-project workflow or an explicit user request. Do not automatically audit maintenance of Pipeline or Resources, direct skill use, or individual worker assignments. Use at a milestone boundary or when coordinated work stops blocked or is abandoned. Include consequential failures and their recovery in that record. An explicitly requested investigation or review audit is also in scope. Do not create a file for each read, tool call, trivial edit, or worker message. One coordinated effort should normally produce one record using the workers' concise results; a task and milestone completed together need only one. No hourly cadence, automatic commits, or progress screenshots.
 
 ## Gather only what is needed
 
@@ -15,15 +15,15 @@ If asked to review document consistency, inspect the relevant sources and relati
 
 ## Write the record
 
-Adapt [the template](templates/AUDIT.md). Honor a target project's existing audit location or explicit destination; otherwise use the default below. The outer Pipeline development-notes folder is not a default for consuming projects. Obtain the actual current UTC time from the environment and create:
+Adapt [the template](templates/AUDIT.md). Honor a target project's existing audit location or explicit destination; otherwise use the default below. The outer Resources development-notes folder is not a default for consuming projects. Obtain the actual current UTC time from the environment and create:
 
-`.project/documents/audits/YYYY-MM-DDTHH-mm-ssZ-short-topic.md` in the team repository
+`<target>/.project/documents/development/audits/YYYY-MM-DDTHH-mm-ssZ-short-topic.md`
 
 Create the folder when needed. Use a numeric suffix on collision; never overwrite an earlier audit. Do not create or update CHECKING.md. Preserve existing historical reports and link them if relevant. On a follow-up, create a new record linking the previous one and describe what changed.
 
 Include the intended outcome, actual roles involved and their assignments, concise attempts/changes, achieved outcome or blocker, and evidence/limits. Distinguish requested roles from actually invoked workers, independent review from self-review, and planned concurrency from observed overlap. If one agent did the work, say so.
 
-For checks, report what ran and its result; distinguish inspection, automated execution, human review, and unverified claims. Link relevant files or existing output instead of copying logs. Write the audit after the app work is committed and verified. Record the version from TASK's version convention and the verified app commit's short hash and subject line (`git -C worktrees/dev log -1 --format='%h %s'`); TESTING.md's coverage record and later release testing depend on it. If work stopped before a commit, say so and name the last commit instead. The branch-manager then commits the team repository, including this audit, with an `App-Commit:` trailer naming the same commit. Do not require hashes for every document.
+For checks, report what ran and its result; distinguish inspection, automated execution, human review, and unverified claims. Link relevant files or existing output instead of copying logs. Include the input revision when available and relevant, noting uncommitted changes; do not require hashes for every document. Exclude secrets and unnecessary personal data.
 
 Aim for a brief record, usually 150–300 words; add only detail needed to explain material findings. Record failed or abandoned approaches that explain the outcome without narrating every step. Do not fabricate approvals, costs, or measurements.
 

@@ -7,7 +7,7 @@ description: Define views and user flows in INTERFACE.md, or create a sitemap, p
 
 Support two outcomes: interface documentation, or a requested series of images showing how someone uses the product. A document request does not authorize image generation. A request for UX images includes the sitemap and prompt preparation needed to produce them; do not stop at a list of prompts when generation was requested.
 
-Read the relevant pitch, existing interface decisions, and supplied references. Use the existing canonical interface document, otherwise `.project/documents/INTERFACE.md` in the team repository. If the project uses DESIGN.md, preserve it unless a rename is authorized. Adapt [the template](templates/INTERFACE.md) only where needed; do not rewrite finished specifications or create implementation plans as a side effect.
+Read the relevant pitch, existing interface decisions, and supplied references. Use the existing canonical interface document, otherwise root `INTERFACE.md`. If the project uses DESIGN.md, preserve it unless a rename is authorized. Adapt [the template](templates/INTERFACE.md) only where needed; do not rewrite finished specifications or create implementation plans as a side effect.
 
 ## Discover generation capability first
 
@@ -27,7 +27,7 @@ Bootstrap or approved images are optional inputs, not prerequisites. Check suppl
 
 Create one saved prompt per planned image in the format required by the discovered model skill. Specify the view's purpose, visible UI, interaction state, sample content, and what must stay consistent with the base. Use fictional sample data. Choose supported dimensions and aspect ratio for the actual layout. Image quality must always be high; never use medium, low, or an unspecified provider default. If the discovered generator cannot supply high quality, report that limitation rather than downgrade.
 
-Keep prompts, images, and generation records under the project's existing artifact convention. Otherwise use `.project/visuals/<provider>/<model>/<view-id>/` in the team repository. In INTERFACE.md, link each view's prompt and, once available, its image and native run record. Briefly state the base dependency and the action connecting it to the next view; do not duplicate entire prompts there.
+Keep prompts, images, and generation records under the project's existing artifact convention. Otherwise use `.project/models/<provider>/<model>/<view-id>/`. In INTERFACE.md, link each view's prompt and, once available, its image and native run record. Briefly state the base dependency and the action connecting it to the next view; do not duplicate entire prompts there.
 
 ## Generate the series
 

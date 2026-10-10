@@ -5,7 +5,7 @@ description: Create or update a concise prose implementation roadmap when planni
 
 # Write a readable implementation plan
 
-Use this skill when authorized work requires creating or revising an implementation roadmap. Installing pipeline resources, discussing an approach, or finding that PLAN.md is absent does not by itself call for creating it. Preserve an existing canonical location; the default is `.project/documents/PLAN.md`.
+Use this skill when authorized work requires creating or revising an implementation roadmap. Installing pipeline resources, discussing an approach, or finding that PLAN.md is absent does not by itself call for creating it. Preserve an existing canonical location; the default is `.project/documents/development/plan.md`.
 
 ## Preserve earlier work
 
